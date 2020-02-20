@@ -8,6 +8,10 @@
 > npm install cors
 > npm install nodemon
 ```
+### Go to the Gooru_portal folder
+```
+> pip3 install -r requirements.txt
+```
 ## Mysql Database Steps
 ```
 Open Mysql Console and then run the below command
@@ -17,8 +21,6 @@ Open Mysql Console and then run the below command
 ```
 Make changes for username,password for sql access inside server.js accordingly, then run the below step.
 > nodemon server.js
-## Go to the Gooru_portal folder
-> pip3 install -r requirements.txt
 ```
 ## Rasa installation:
 ```
@@ -32,7 +34,7 @@ Make changes for username,password for sql access inside server.js accordingly, 
 > rasa run actions
 ```
 
-## open antoher terminal and execute the following commands
+### open antoher terminal and execute the following commands
 ```
 > rasa train
 > rasa run -m models --enable-api --cors "*" --debug
