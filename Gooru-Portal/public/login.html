@@ -1,0 +1,198 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!---------->
+		<meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="432767029371-707q2gg7pa145ktk94vc079b4r3mntcu.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/jquery-ui.min.js"></script>
+		<link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/themes/ui-lightness/jquery-ui.css" type="text/css" />
+		<!----------->
+		<title>Precision Learning in Enterprise - IIIT Bangalore</title>
+		<link rel="icon" href="data:,">
+		<link rel="stylesheet" href="./styles/style.css" />
+	</head>
+	<body onload="StartTimers();" onmousemove="ResetTimers();">
+		<!-- VIDEO BG -->
+		<!-- <video autoplay preload="true" muted loop class="loginVideo">
+    		<source src="./videos/loginVideo.mp4" type="video/mp4" />
+		</video> -->
+		<!------------------>
+
+		<!-- TITLE -->
+		<div>
+			<img class='iiitb-logo' src="./images/IIIT-B_logo.jpg" alt="IIIT-Bangalore_Logo" />
+		</div>
+		<!-- <div class='user-data' id="user-information" hidden>
+    	<div>
+    		<label>Name</label>
+    		<span></span>
+    	</div>
+    	<div>
+    		<label>ID</label>
+    		<span></span>
+    	</div>
+    	<div>
+    		<label>Gender</label>
+    		<span></span>
+    	</div>
+    	<div>
+    		<label>Picture</label>
+    		<span></span>
+    	</div>
+    	<div>
+    		<label>Email</label>
+    		<span></span>
+    	</div>
+    </div> -->
+		<div class='main-title'>
+			<p>Precision Learning in Enterprise</p>
+		</div>
+		<!-- LOGIN BTN -->
+		<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};HandleGoogleApiLibrary()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+		<div class='login-button' id='google-login-button'>
+			<button type="button" class="google-button">
+				  <span class="google-button__icon">
+				    <svg viewBox="0 0 366 372" xmlns="http://www.w3.org/2000/svg"><path d="M125.9 10.2c40.2-13.9 85.3-13.6 125.3 1.1 22.2 8.2 42.5 21 59.9 37.1-5.8 6.3-12.1 12.2-18.1 18.3l-34.2 34.2c-11.3-10.8-25.1-19-40.1-23.6-17.6-5.3-36.6-6.1-54.6-2.2-21 4.5-40.5 15.5-55.6 30.9-12.2 12.3-21.4 27.5-27 43.9-20.3-15.8-40.6-31.5-61-47.3 21.5-43 60.1-76.9 105.4-92.4z" id="Shape" fill="#EA4335"/><path d="M20.6 102.4c20.3 15.8 40.6 31.5 61 47.3-8 23.3-8 49.2 0 72.4-20.3 15.8-40.6 31.6-60.9 47.3C1.9 232.7-3.8 189.6 4.4 149.2c3.3-16.2 8.7-32 16.2-46.8z" id="Shape" fill="#FBBC05"/><path d="M361.7 151.1c5.8 32.7 4.5 66.8-4.7 98.8-8.5 29.3-24.6 56.5-47.1 77.2l-59.1-45.9c19.5-13.1 33.3-34.3 37.2-57.5H186.6c.1-24.2.1-48.4.1-72.6h175z" id="Shape" fill="#4285F4"/><path d="M81.4 222.2c7.8 22.9 22.8 43.2 42.6 57.1 12.4 8.7 26.6 14.9 41.4 17.9 14.6 3 29.7 2.6 44.4.1 14.6-2.6 28.7-7.9 41-16.2l59.1 45.9c-21.3 19.7-48 33.1-76.2 39.6-31.2 7.1-64.2 7.3-95.2-1-24.6-6.5-47.7-18.2-67.6-34.1-20.9-16.6-38.3-38-50.4-62 20.3-15.7 40.6-31.5 60.9-47.3z" fill="#34A853"/></svg>
+				  </span>
+			    <span class="google-button__text">Sign in with Google</span>
+			</button>
+		</div>
+		<div id="timeout">
+    <h1>Session About To Timeout</h1>
+    <p>You will be automatically logged out in 1 minute.<br />
+    To remain logged in move your mouse over this window.
+		</div>
+		<script>
+		function HandleGoogleApiLibrary() {
+			// Load "client" & "auth2" libraries
+			gapi.load('client:auth2',  {
+				callback: function() {
+					// Initialize client & auth libraries
+					gapi.client.init({
+							apiKey: 'AIzaSyCSKAEbAIYeBwXYpeYjSylD2LwT5Rdy6xs',
+							clientId: '432767029371-707q2gg7pa145ktk94vc079b4r3mntcu.apps.googleusercontent.com',
+							scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me'
+					}).then(
+						function(success) {
+								// Libraries are initialized successfully
+								// You can now make API calls
+						},
+						function(error) {
+							// Error occurred
+							// console.log(error) to find the reason
+							}
+					);
+				},
+				onerror: function() {
+					// Failed to load libraries
+				}
+			});
+		}
+		// document.getElementById("google-login-button").onclick = function(){
+		var google_button_click = document.getElementsByClassName('login-button')[0];
+		google_button_click.addEventListener('click', function (event) {
+			$('#google-login-button').attr('disabled', 'disabled');
+
+			// API call for Google login
+			gapi.auth2.getAuthInstance().signIn().then(
+				// On success
+				function(success) {
+					// API call to get user information
+					gapi.client.request({ path: 'https://www.googleapis.com/plus/v1/people/me' }).then(
+						// On success
+						function(success) {
+							// console.log(success);
+							var user_info = JSON.parse(success.body);
+							// console.log(user_info);
+							// localStorage.setItem('lists', JSON.stringify(user_info));
+							//
+							// $("#user-information div").eq(0).find("span").text(user_info.displayName);
+							// $("#user-information div").eq(1).find("span").text(user_info.id);
+							// $("#user-information div").eq(2).find("span").text(user_info.gender);
+							// $("#user-information div").eq(3).find("span").html('<img src="' + user_info.image.url + '" />');
+							// $("#user-information div").eq(4).find("span").text(user_info.emails[0].value);
+							//
+							// $("#user-information").show();
+							// $("#google-login-button").hide();
+							var URL = 'http://localhost:5555/checkrole'
+							var dataString = "email="+(user_info.emails[0].value);
+							$.ajax({
+							    type: 'POST',
+							    url: URL,
+				   			  data: dataString,
+							    success: function(data) {
+										if(data==='admin')
+										{
+											window.location.href='/admin';
+										}
+										else if(data==='user')
+										{
+											window.location.href='/user';
+										}
+							    }
+							});
+						},
+						// On error
+						function(error) {
+							$("#google-login-button").removeAttr('disabled');
+							alert('Error : Failed to get user user information');
+						}
+					);
+				},
+				// On error
+				function(error) {
+					$("#google-login-button").removeAttr('disabled');
+					alert('Error : Login Failed');
+				}
+			);
+
+		});
+		</script>
+		<script>
+		var timoutWarning = 60000; // Display warning in 14 Mins.
+		var timoutNow = 120000; // Timeout in 15 mins.
+		var logoutUrl = 'http://localhost:5555/login'; // URL to logout page.
+
+		var warningTimer;
+		var timeoutTimer;
+
+		// Start timers.
+		function StartTimers() {
+		    warningTimer = setTimeout("IdleWarning()", timoutWarning);
+		    timeoutTimer = setTimeout("IdleTimeout()", timoutNow);
+		}
+
+		// Reset timers.
+		function ResetTimers() {
+		    clearTimeout(warningTimer);
+		    clearTimeout(timeoutTimer);
+		    StartTimers();
+				if($('#timeout').parents('.ui-dialog:visible').length){
+		    $("#timeout").dialog('close');
+			}
+		}
+
+		// Show idle timeout warning dialog.
+		function IdleWarning() {
+		    $("#timeout").dialog({
+		        modal: true
+		    });
+		}
+
+		// Logout the user.
+		function IdleTimeout() {
+		    window.location = logoutUrl;
+		}
+		</script>
+		<!------------------>
+
+	<!-- FOOTER -->
+	<footer style="position: fixed;left: 0px;bottom: 1px;width: 100%;background-color: #004C98;color: white;text-align: center;">
+		<p>Copyright @ 2019 IIIT-Bangalore</p>
+	</footer>
+	</body>
+</html>

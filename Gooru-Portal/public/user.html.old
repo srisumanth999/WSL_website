@@ -1,0 +1,995 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Precision Learning in Enterprise - IIIT Bangalore</title>
+		<link rel="icon" href="data:,">
+		<link rel="stylesheet" href="./styles/style.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+		<!-- <script src="https://d3js.org/d3.v4.js"></script> -->
+		<script src="https://d3js.org/d3.v5.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.9.1/d3.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<!-- <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script> -->
+	</head>
+	<body>
+		<!-- TITLE -->
+		<div class="header">
+			<div class="" style="position:absolute;"><img class='iiitb-logo' src="./images/IIIT-B_logo.jpg" alt="IIIT-Bangalore_Logo" /></div>
+			<div class="display-inline">Precision Learning in Enterprise</div>
+<!-- 			<div><input class='logoutbtn' type="text" placeholder="Search.."></div> -->
+			<div class="logoutbtn"><input class="adminbutton" type="submit" value="Logout" /></div>
+			<div class="addmoreadmin">Welcome to the portal <p id="username">Prakhar</p></div>
+		</div>
+
+		<div id="page">
+		    <div id="maincontent">
+		    	<div id="learningstab">
+		    		<!-- <p><font size="5" color="#004C98"><b></b></font></p>
+		    		<div class='mylearning'>
+		    			<p class="active" id="facetName">Facet Name</a>
+		    		</div> -->
+
+
+		    		<!-- <div class="learningpathbtn">
+		    			<input type="submit" id="" class="pathbutton" value="View Learning Paths" onclick="showPossibelLearningPaths(this);" />
+		    		</div> -->
+
+		    	</div>
+		    	<div id="learningpathwaygraph">
+		    		<p id="currentlyActive"></p>
+						<div id="chart" style="padding: 20px 20px 20px 20px">
+            <svg width="960" height="600"></svg>
+        </div>
+        <div>
+            <div>
+                <button type="button" class="btn btn-success" onclick="startPath()" id="startBtn" style="display: none;">Start creating a new Path</button>
+                <button type="button" class="btn btn-success" onclick="endPath()" id="endBtn" style="display: none;">End creating a new Path</button>
+            </div>
+            <div class="inline">
+                <span>Toggle Lines</span>
+                <br/>
+                <br/>
+                <label class="switch">
+                        <input type="checkbox" name="toggle-lines">
+                        <span class="slider round"></span>
+                </label>
+            </div>
+            <!-- <div class="inline">
+            <span>Select Path</span>
+            <br/>
+            <br/>
+            <label class="switch">
+                    <input type="checkbox" name="select-path">
+                    <span class="slider round"></span>
+            </label>
+            </div> -->
+            <div class="inline">
+                <span>Toggle Points</span>
+                <br/>
+                <br/>
+                <label class="switch">
+                        <input type="checkbox" name="toggle-points">
+                        <span class="slider round"></span>
+                </label>
+            </div>
+            <!-- <div class="inline">
+            <span>Admin Page</span>
+            <br/>
+            <br/>
+            <label class="switch">
+                    <input type="checkbox" name="admin-page">
+                    <span class="slider round"></span>
+            </label>
+            </div>   -->
+        </div>
+		    	</div>
+		    	<div id="learningpathwaylist">
+
+		    	</div>
+		    </div>
+		    <div id="genericconcent">
+		    	<div id="menucontentupload">
+	    		   <input type="text" id="searchgeneric" onkeyup="searchFunction()" placeholder="Search for maps...">
+					    <ul id="searchUL">
+
+						</ul>
+				</div>
+		    </div>
+		</div>
+
+	<!-- FOOTER -->
+	<footer style="position: fixed;left: 0px;bottom: 1px;width: 100%;background-color: #004C98;color: white;text-align: center;">
+		<p>Copyright @ 2019 IIIT-Bangalore</p>
+	</footer>
+
+	<script type="text/javascript">
+		window.onload = function() {
+			//document.getElementsByClassName("pathbutton")[0].style.display = 'none';
+			//document.getElementById('facetName').style.display = 'none';
+			document.getElementById("learningpathwaygraph").style.display = 'none';
+			var content = showAllMaps();
+			document.getElementById('searchUL').innerHTML = content;
+		};
+
+		function showAllMaps(){
+			var URL= 'http://0.0.0.0:5555/getMaps'
+			var content='';
+			// content to be filled thorugh apI call
+			// content = "<li><a href='#' id=101 onclick='openFacet(101);'>Reinforcement Learning</a></li>\
+			// <li><a href='#'' id=102 onclick=''>Practical Machine Learning</a></li>"fo
+			$.ajax({
+			    type: 'GET',
+			    url: URL,
+			    contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+			    success: function(data) {
+						var fdata = data.split('END')
+						for (var i=0; i< fdata.length-1 ; i++){
+								content += "<li>"+fdata[i]+"</li>"
+						}
+						document.getElementById('searchUL').innerHTML = content;
+					}
+			});
+		}
+
+		function showmodulepath(learning){
+			// make api call to get the list  [TODO]
+
+			document.getElementById('searchresult').innerHTML = content;
+			// document.getElementById('whichoneselected').innerHTML = 'General';
+		}
+
+		function showpersonalsearch() {
+			// make api call to get the list  [TODO]
+			var content = "<a href='#'>Theoretical Physics Competency & Path</a>"+
+						  "<a href='#'>Practical Deep Learning Competency & Path</a>"
+			document.getElementById('searchresult').innerHTML = content;
+			// document.getElementById('whichoneselected').innerHTML = 'Personal';
+
+		}
+
+		function showPossibelLearningPaths(element){
+			// CALL API TO GET PATHS for element.id
+			if (element.id === '101_lp'){
+				var content = "<b>Learning Paths</b> \
+								<a id='101_lp_1' onclick='openPath(this);'><div class='modules'><div id='paths'><b>Mastering Maths in RL</b></div></div></a> \
+				   			   <a id='101_lp_2' onclick='openPath(this);'><div class='modules'><div id='paths'><b>Zero to Hero | Q-Learning</b></div></div></a>"
+				document.getElementById('learningpathwaylist').innerHTML = content;
+			}
+		}
+
+		function openMap(facetId){
+			var facetName = document.getElementById(facetId).text;
+			//document.getElementById('facetName').innerHTML = facetName;
+			//document.getElementsByClassName("pathbutton")[0].setAttribute("id", facetId+'_lp');
+			//document.getElementsByClassName("pathbutton")[0].style.display = 'block';
+			//document.getElementById('facetName').style.display = 'block';
+			var URL = 'http://0.0.0.0:5555/getpath'
+			console.log(URL);
+			var dataString = "id="+facetId;
+			console.log(dataString);
+			$.ajax({
+			    type: 'POST',
+			    url: URL,
+   			  data: dataString,
+			    success: function(data) {
+						d = data.split('/');
+						competency_loc = data+'/'+d.slice(-1)+'_map.csv'
+						console.log(competency_loc);
+						path_loc = data+'/'+d.slice(-1)+'_path.csv'
+						console.log(path_loc);
+						drawCompetencies(competency_loc, path_loc)
+						document.getElementById("learningpathwaygraph").style.display = 'inline-block';
+			    }
+			});
+		}
+
+		function openPath(country){
+			var content = ''
+		}
+
+		function openResource(country, action, color=null){
+			var content = ''
+			if (country === 'India'){
+				content = "<div class='modules' id='India' style='background-color:"+color+";'><div id='heading'><b>Basic Maths</b></div><div id='links'><table><tr><td><a href='#'>Basic ML Maths - Chapter 1</a></td><td><a href='#'>Concise Introduction to Elementary Maths - Medium Blog</a></td></tr></table></div></div>"
+				console.log(content);
+			} else if(country === 'China'){
+				content = "<div class='modules' id='China' style='background-color:"+color+";'><div id='heading'><b>Public Speaking</b></div><div id='links'><table><tr><td><a href='#'>How to speak - Youtube Video</a></td></tr></table></div></div>"
+			} else if(country === 'Pakistan'){
+				content = "<div class='modules' id='Pakistan' style='background-color:"+color+";'><div id='heading'><b>Advanced Maths</b></div><div id='links'><table><tr><td><a href='#'>Maths - Youtube Video</a></td></tr></table></div></div>"
+			}
+			if (action==='remove'){
+				console.log('ee');
+				document.getElementById(country).remove();
+			} else if (action==='add'){
+				var theDiv = document.getElementById("learningpathwaylist");
+				theDiv.insertAdjacentHTML('beforeend', content);
+			}
+		}
+
+
+		function searchFunction() {
+		    var input, filter, ul, li, a, i, txtValue;
+		    input = document.getElementById("searchgeneric");
+		    filter = input.value.toUpperCase();
+		    ul = document.getElementById("searchUL");
+		    li = ul.getElementsByTagName("li");
+		    for (i = 0; i < li.length; i++) {
+		        a = li[i].getElementsByTagName("a")[0];
+		        txtValue = a.textContent || a.innerText;
+		        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+		            li[i].style.display = "";
+		        } else {
+		            li[i].style.display = "none";
+		        }
+		    }
+		}
+	</script>
+
+	<script>
+	var selectedPoints=[-1,-1];
+var pathPoints=[];
+var createPath=false;
+$(document).ready(function(){
+$('input[name=toggle-lines]').click(function(){
+	if($(this).prop("checked") == true){
+		d3.selectAll(".line-group")
+			.style("display","initial");
+	}
+	else if($(this).prop("checked") == false){
+		d3.selectAll(".line-group")
+			.style("display","none");
+	}
+});
+$('input[name=toggle-points]').click(function(){
+if($(this).prop("checked") == true){
+	d3.selectAll(".circle-normal")
+		.style("display","none");
+}
+else if($(this).prop("checked") == false){
+	d3.selectAll(".circle-normal")
+		.style("display","initial");
+}
+});
+$('input[name=select-path]').click(function(){
+if($(this).prop("checked") == true){
+	d3.selectAll(".line-group")
+		.style("display","none");
+	d3.selectAll(".circle-group")
+	.style("display","none");
+	d3.selectAll(".circle-normal")
+	.style("display","none");
+	d3.selectAll(".circle-select")
+	.style("display","initial");
+	$('input[name=toggle-lines]').prop('checked',false);
+	selectedPoints=[-1,-1];
+}
+else if($(this).prop("checked") == false){
+	d3.selectAll(".line-group")
+		.style("display","initial");
+	d3.selectAll(".circle-group")
+		.style("display","initial");
+	d3.selectAll(".circle-normal")
+		.style("display","initial");
+	d3.selectAll(".circle-select")
+		.style("display","none");
+	selectedPoints=[-1,-1];
+}
+});
+$('input[name=admin-page]').click(function(){
+if($(this).prop("checked") == true){
+	d3.selectAll(".line-group")
+		.style("display","none");
+	d3.selectAll(".circle-group")
+	.style("display","none");
+	d3.selectAll(".circle-normal")
+	.style("display","none");
+	d3.selectAll(".circle-select")
+	.style("display","none");
+	d3.selectAll(".admin-select")
+	.style("display","initial");
+	console.log(d3.select("#startBtn"))
+	d3.select("#startBtn")
+		.style("display","initial");
+	$('input[name=toggle-lines]').prop('checked',false);
+	$('input[name=select-path]').prop('checked',false);
+}
+else if($(this).prop("checked") == false){
+	d3.selectAll(".line-group")
+		.style("display","initial");
+	d3.selectAll(".circle-group")
+		.style("display","initial");
+	d3.selectAll(".circle-normal")
+		.style("display","initial");
+	d3.selectAll(".circle-select")
+		.style("display","none");
+	d3.selectAll(".admin-select")
+		.style("display","none");
+	d3.select("#startBtn")
+		.style("display","none");
+	d3.select("#endBtn")
+		.style("display","none");
+}
+});
+});
+</script>
+	<script>
+
+		function drawCompetencies(c, p){
+			console.log(c);
+			console.log(p);
+			console.log(d3);
+			// set the dimensions and margins of the graph
+			var margin = {top: 10, right: 20, bottom: 30, left: 50},
+		    width = 700 - margin.left - margin.right,
+		    height = 650 - margin.top - margin.bottom;
+
+			// append the svg object to the body of the page
+			var svg = d3.select("#learningpathwaygraph")
+			  .append("svg")
+			    .attr("width", width + margin.left + margin.right)
+			    .attr("height", height + margin.top + margin.bottom)
+			  .append("g")
+			    .attr("transform",
+			          "translate(" + margin.left + "," + margin.top + ")");
+
+
+			//Read the data
+
+
+var data=[{name:"Path",select:0,lineId:0,values:[]}];
+d3.csv('./mathematics_path.csv',function(d){
+  console.log(d[0].id);
+  console.log(d[0]);
+  var numLines=0;
+  // var minX,maxX,minY,maxY;
+  var minX1=d3.min(d,e=>+e.topic_volume)-10;
+  var maxX1=d3.max(d,e=>+e.topic_volume)+10;
+  var minY1=d3.min(d,e=>+e.doc_volume)-10;
+  var maxY1=d3.max(d,e=>+e.doc_volume)+10;
+
+
+  // minX=2000;
+  // maxX=2010;
+  // minY=0;
+  // maxY=250;
+//   // console.log(minX);
+  for(var i=0;i<d.length;i++)
+  {
+    if(numLines<+d[i].id)
+    {
+      numLines=+d[i].id;
+    }
+  }
+  numLines++;
+  for(var i=0;i<numLines;i++)
+  {
+    data[i]={name:"Path "+i,select:0,lineId:i,values:[]};
+  }
+  for(var i=0;i<d.length;i++)
+  {
+    data[d[i].id].values.push(d[i]);
+  }
+  console.log(data[9]);
+
+/* Format Data */
+data.forEach(function(d) {
+  d.values.forEach(function(d) {
+    d.x = +d.topic_volume;
+    d.y = +d.doc_volume;
+    d.select=0;
+  });
+});
+
+d3.csv('mathematics_map.csv',function(d){
+  console.log(d);
+  valuesSelect=[]
+  for(var i=1;i<d.length;)
+  {
+  	valuesSelect.push({id:i,sequence_id:i,x:d[i].topic_volume,y:d[i].doc_volume,select:0,lineId:-1})
+  	i+=2;
+  }
+  console.log(valuesSelect);
+  var minX2=d3.min(d,e=>+e.topic_volume)-10;
+  var maxX2=d3.max(d,e=>+e.topic_volume)+10;
+  var minY2=d3.min(d,e=>+e.doc_volume)-10;
+  var maxY2=d3.max(d,e=>+e.doc_volume)+10;
+  var minX=Math.min(minX1,minX2)
+  var maxX=Math.max(maxX1,maxX2)
+  var minY=Math.min(minY1,minY2)
+  var maxY=Math.max(maxY1,maxY2)
+
+var width = 700;
+var height = 400;
+var margin = 50;
+var duration = 250;
+var svg = d3.select("svg");
+svg.attr("width", (width+margin)+"px")
+.attr("height", (height+margin)+"px")
+// .attr("transform", `translate(${margin}, ${margin})`);
+
+// var width = +svg.attr("width"),
+//     height = +svg.attr("height");
+
+var lineOpacity = "0.25";
+var lineOpacityHover = "0.85";
+var otherLinesOpacityHover = "0.1";
+var lineStroke = "1.5px";
+var lineStrokeHover = "2.5px";
+
+var circleOpacity = '0.85';
+var circleOpacityOnLineHover = "0.25"
+var circleRadius = 3;
+var circleRadiusHover = 6;
+
+
+
+var brush = d3.brush().on("end", brushended),
+idleTimeout,
+idleDelay = 350;
+
+/* Scale */
+var xScale = d3.scaleLinear()
+  .domain([minX,maxX])
+  .range([20, width]);
+
+var yScale = d3.scaleLinear()
+  .domain([minY,maxY])
+  .range([height, 0]);
+
+ /* Add Axis into SVG */
+// var xAxis=svg.append("g")
+//   .attr("class", "x_axis")
+//   .attr("transform", `translate(0, ${height-10})`)
+//   .call(d3.axisBottom(xScale).ticks(5));
+
+// var yAxis=svg.append("g")
+//   .attr("class", "y_axis")
+//   .attr("transform", "translate(10,0)")
+//   .call(d3.axisLeft(yScale).ticks(5))
+
+var xAxis = d3.axisBottom(xScale).ticks(12),
+    yAxis = d3.axisLeft(yScale).ticks(12);
+
+svg.append("g")
+    .attr("class", "axis axis--x")
+  .attr("transform", `translate(0, ${height})`)
+  // .attr("transform", "translate(0," + (height) + ")")
+    .call(xAxis);
+
+svg.append("g")
+    .attr("class", "axis axis--y")
+    .attr("transform", "translate(20,0)")
+    .call(yAxis);
+
+  svg.selectAll(".domain")
+  .style("display", "none");
+
+  svg.append("g")
+  .attr("class", "brush")
+  .call(brush);
+
+function idled() {
+  idleTimeout = null;
+}
+
+function brushended() {
+  var s = d3.event.selection;
+  if (!s) {
+    if (!idleTimeout) return idleTimeout = setTimeout(idled, idleDelay);
+    xScale.domain([minX,maxX])
+    yScale.domain([minY,maxY]);
+  } else {
+    xScale.domain([s[0][0], s[1][0]].map(xScale.invert, xScale));
+    yScale.domain([s[1][1], s[0][1]].map(yScale.invert, yScale));
+    svg.select(".brush").call(brush.move, null);
+  }
+  zoom();
+}
+function zoom() {
+  var t = svg.transition().duration(750);
+  svg.select(".axis--x").transition(t).call(xAxis);
+  svg.select(".axis--y").transition(t).call(yAxis);
+  svg.selectAll("circle")
+      .attr("cx", function(d) { return xScale(d.x); })
+      .attr("cy", function(d) { return yScale(d.y); });
+  var line = d3.line()
+    .curve(d3.curveMonotoneX)
+    .x(d => xScale(d.x))
+    .y(d => yScale(d.y));
+  svg.selectAll(".line")
+      .attr('d', function(d){return line(d.values);})
+}
+
+var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+/* Add line into SVG */
+var line = d3.line()
+  .curve(d3.curveMonotoneX)
+  .x(d => xScale(d.x))
+  .y(d => yScale(d.y));
+
+var test_call=function(d){
+  console.log(d);
+}
+
+svg.selectAll('.line-group')
+  .data(data).enter()
+  .append('g')
+  .attr('class', 'line-group')
+  .style("display","none")
+  .on("mouseover", function(d, i) {
+      svg.append("text")
+          .attr("class", "title-text")
+        .style("fill", color(i))
+        .text(d.name)
+        .attr("text-anchor", "middle")
+        .attr("x", (width-margin)/2)
+        .attr("y", 5);
+    })
+  .on("mouseout", function(d) {
+      svg.select(".title-text").remove();
+    })
+  .append('path')
+  .attr('class', 'line')
+  .attr('id',d=>"line"+d.lineId)
+  .attr('d', d => line(d.values))
+  .style('stroke', "#808080")
+  .style('opacity', lineOpacity)
+  .on("mouseover", function(d,i) {
+      d3.selectAll('.line')
+                    .style('opacity', otherLinesOpacityHover);
+      d3.selectAll('.circle')
+                    .style('opacity', circleOpacityOnLineHover);
+      d3.select(this)
+        .style('opacity', lineOpacityHover)
+        .style("stroke-width", lineStrokeHover)
+        .style("cursor", "pointer")
+        .style("stroke",color(i));
+      })
+  .on("mouseout", function(d,i) {
+      d3.selectAll(".line")
+                    .style('opacity', lineOpacity);
+      d3.selectAll('.circle')
+                    .style('opacity', circleOpacity);
+      if(d.select==1)
+      {
+      d3.select(this)
+      .style('opacity', lineOpacityHover)
+      .style("stroke-width", lineStrokeHover)
+      .style("cursor", "pointer")
+      .style("stroke",color(i));
+      }
+      if(d.select==0)
+      {
+        d3.select(this)
+          .style("stroke-width", lineStroke)
+          .style("cursor", "none")
+          .style("stroke","#808080");
+      }
+    })
+    .on('click',function(d,i){
+      if(d.select==0)
+      {
+        d.select=1;
+        d3.select(this)
+          .style('opacity', lineOpacityHover)
+          .style("stroke-width", lineStrokeHover)
+          .style("cursor", "pointer")
+          .style("stroke",color(i));
+        // for(var i=0;i<d.values.length;i++)
+        // {
+        //   d.values[i].select=1;
+        // }
+        // console.log(d)
+      }
+      else{
+        d.select=0;
+        d3.select(this)
+          .style("stroke-width", lineStroke)
+          .style("cursor", "pointer")
+          .style("stroke","#808080");
+      }
+      test_call(d);
+    });
+    // data.forEach(function(d){
+    //   d.values.sort(function(a,b){
+    //     return a.X-b.X;
+    //   })
+    // })
+
+// console.log(data[0])
+
+
+
+
+var tooltip = d3.select("#chart")
+.append("div")
+.style("opacity", 0)
+.attr("class", "tooltip")
+.style("background-color", "white")
+.style("border", "solid")
+.style("border-width", "1px")
+.style("border-radius", "5px")
+.style("padding", "10px")
+
+// A function that change this tooltip when the user hover a point.
+// Its opacity is set to 1: we can now see it.
+var mouseoverTooltip = function() {
+  tooltip
+    .style("opacity", 1)
+}
+
+var mousemoveTooltip = function(d) {
+  console.log(d);
+  tooltip
+    .html("Seq Id: " + d.sequence_id+"<br/> Topic: "+d.topic)
+    .style("left", (d3.mouse(this)[0]+35) + "px")
+    .style("top", (d3.mouse(this)[1]) + "px")
+    .style("pointer-events","none")
+}
+
+// A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
+var mouseleaveTooltip = function() {
+  tooltip
+    .transition()
+    .duration(200)
+    .style("opacity", 0)
+}
+
+
+  /* Add circles in the line */
+svg.selectAll("circle-group")
+  .data(data).enter()
+  .append("g")
+  .style("fill", "#808080")
+  .selectAll("circle")
+  .data(d => d.values).enter()
+  .append("g")
+  .attr("class", "circle-normal")
+  .on("mouseover", function(d) {
+      d3.select(this)
+        .style("cursor", "pointer")
+        .attr("x", d => xScale(d.x) + 5)
+        .attr("y", d => yScale(d.y) - 10);
+    })
+  .on("mouseout", function(d) {
+      d3.select(this)
+        .style("cursor", "none")
+        .transition()
+        .duration(duration)
+    })
+  .append("circle")
+  .attr("cx", d => xScale(d.x))
+  .attr("cy", d => yScale(d.y))
+  .attr("r", circleRadius)
+  .style('opacity', circleOpacity)
+  .on("mouseover", function(d) {
+        d3.select(this)
+          .style("fill",color(d.lineId));
+        mouseoverTooltip();
+      })
+  .on("mouseout", function(d) {
+    if(d.select==0)
+    {
+      d3.select(this)
+      .style("fill","#808080")
+    }
+    mouseleaveTooltip();
+    })
+    .on("mousemove",mousemoveTooltip)
+.on('click',function(d){
+  if(d.select==0)
+  {
+    d3.select(this)
+    .style("fill",color(d.lineId))
+    d.select=1;
+  }
+  else{
+    d.select=0;
+    d3.select(this)
+    .style("fill","#808080")
+  }
+  test_call(d);
+});
+
+
+/* add points to the graph*/
+svg.selectAll("points")
+  .data(valuesSelect).enter()
+  .append("g")
+  .style("fill", "#808080")
+  .attr("class", "circle-normal")
+  .on("mouseover", function(d) {
+      d3.select(this)
+        .style("cursor", "pointer")
+        .attr("x", d => xScale(d.x) + 5)
+        .attr("y", d => yScale(d.y) - 10);
+    })
+  .on("mouseout", function(d) {
+      d3.select(this)
+        .style("cursor", "none")
+        .transition()
+        .duration(duration)
+        .selectAll(".text").remove();
+    })
+  .append("circle")
+  .attr("cx", d => xScale(d.x))
+  .attr("cy", d => yScale(d.y))
+  .attr("r", circleRadius)
+  .style('opacity', circleOpacity)
+  .on("mouseover", function(d) {
+        d3.select(this)
+          .style("fill", "#FF1493")
+        mouseoverTooltip();
+      })
+  .on("mouseout", function(d) {
+    if(d.select==0)
+    {
+      d3.select(this)
+        .style("fill", "#808080")
+    }
+    mouseleaveTooltip();
+  })
+.on("mousemove",mousemoveTooltip)
+.on('click',function(d){
+  if(d.select==0)
+  {
+    d.select=1;
+  }
+  else{
+    d.select=0;
+  }
+  test_call(d);
+});
+
+
+// /* user selecting path */
+// lines.selectAll("userPoints")
+//   .data(valuesSelect).enter()
+//   .append("g")
+//   .style("fill", "#808080")
+//   .attr("class", "circle-select")
+//   .style("display","none")
+//   .on("mouseover", function(d) {
+//       d3.select(this)
+//         .style("cursor", "pointer")
+//         .append("text")
+//         .attr("class", "text")
+//         .text(`${d.y}`)
+//         .attr("x", d => xScale(d.x) + 5)
+//         .attr("y", d => yScale(d.y) - 10);
+//     })
+//   .on("mouseout", function(d) {
+//       d3.select(this)
+//         .style("cursor", "none")
+//         .transition()
+//         .duration(duration)
+//         .selectAll(".text").remove();
+//     })
+//   .append("circle")
+//   .attr("id",d=>"circleSelect"+d.id)
+//   .attr("cx", d => xScale(d.x))
+//   .attr("cy", d => yScale(d.y))
+//   .attr("r", circleRadius)
+//   .style('opacity', circleOpacity)
+//   .on("mouseover", function(d) {
+//         d3.select(this)
+//           .style("fill", "#FF1493")
+//         mouseoverTooltip();
+//       })
+//   .on("mouseout", function(d) {
+//     if(d.select==0)
+//     {
+//       d3.select(this)
+//         .style("fill", "#808080")
+//       mouseleaveTooltip();
+//     }
+// })
+// .on("mousemove",mousemoveTooltip)
+// .on('click',function(d){
+//   d.select=1;
+//   if(selectedPoints[0]==-1)
+//   {
+//     selectedPoints[0]=d.id;
+//   }
+//   else{
+//     selectedPoints[1]=d.id;
+//     afterSelect();
+//   }
+//   test_call(d);
+// });
+
+// function afterSelect(){
+//     if(valuesSelect[selectedPoints[0]].lineId==valuesSelect[selectedPoints[1]].lineId)
+//     {
+//       swal("There is a path");
+//       var a=document.getElementById('line'+valuesSelect[selectedPoints[1]].lineId)
+//         a.style.opacity=lineOpacityHover;
+//         a.style.strokeWidth= lineStrokeHover;
+//         a.style.stroke=color(valuesSelect[selectedPoints[1]].lineId);
+//         a=document.getElementById('circleSelect'+selectedPoints[0]);
+//         // console.log(a);
+//         a.style.fill= "#808080";
+//         a=document.getElementById('circleSelect'+selectedPoints[1]);
+//         a.style.fill="#808080";
+//         $('input[name=select-path]').prop('checked',false);
+//         $('input[name=toggle-lines]').prop('checked',true);
+//         d3.selectAll(".line-group")
+//         .style("display","initial");
+//         d3.selectAll(".circle-group")
+//           .style("display","initial");
+//         d3.selectAll(".circle-normal")
+//           .style("display","initial");
+//         d3.selectAll(".circle-select")
+//           .style("display","none");
+//         data[valuesSelect[selectedPoints[0]].lineId]=1;
+//         selectedPoints=[-1,-1];
+//     }
+//     else{
+//       swal("Sorry! There is no path");
+//       a=document.getElementById('circleSelect'+selectedPoints[0]);
+//       // console.log(a);
+//       a.style.fill= "#808080";
+//       a=document.getElementById('circleSelect'+selectedPoints[1]);
+//       a.style.fill="#808080";
+//       selectedPoints=[-1,-1];
+//     }
+// }
+
+// /* admin selecting path */
+// lines.selectAll("points")
+//   .data(valuesSelect).enter()
+//   .append("g")
+//   .style("fill", "#808080")
+//   .attr("class", "admin-select")
+//   .style("display","none")
+//   .on("mouseover", function(d) {
+//       d3.select(this)
+//         .style("cursor", "pointer")
+//         .append("text")
+//         .attr("class", "text")
+//         .text(`${d.y}`)
+//         .attr("x", d => xScale(d.x) + 5)
+//         .attr("y", d => yScale(d.y) - 10);
+//     })
+//   .on("mouseout", function(d) {
+//       d3.select(this)
+//         .style("cursor", "none")
+//         .transition()
+//         .duration(duration)
+//         .selectAll(".text").remove();
+//     })
+//   .append("circle")
+//   .attr("id",d=>"adminSelect"+d.id)
+//   .attr("cx", d => xScale(d.x))
+//   .attr("cy", d => yScale(d.y))
+//   .attr("r", circleRadius)
+//   .style('opacity', circleOpacity)
+//   .on("mouseover", function(d) {
+//         d3.select(this)
+//           .style("fill", "#FF1493")
+//         mouseoverTooltip();
+//       })
+//   .on("mouseout", function(d) {
+//     if(d.select==0)
+//     {
+//       d3.select(this)
+//         .style("fill", "#808080")
+//     }
+//     mouseleaveTooltip();
+// })
+// .on("mousemove",mousemoveTooltip)
+// .on('click',function(d){
+//   d.select=1;
+//   if(createPath)
+//   {
+//     adminSelectPath(d);
+//   }
+// });
+// // {x: "2000", y: "100",select: 0,lineId:0},
+
+// function startPath(){
+//   createPath=true;
+//   d3.select("#startBtn")
+//     .style("display","none");
+//   d3.select("#endBtn")
+//     .style("display","initial");
+// }
+
+// function adminSelectPath(d){
+//   pathPoints.push(d.id)
+// }
+
+// function endPath(){
+//   createPath=false;
+//   var temp=valuesSelect[pathPoints[0]].lineId;
+//   var unique=false;
+//   for(var i=0;i<pathPoints.length;i++)
+//   {
+//     if(valuesSelect[pathPoints[i]].lineId!=temp)
+//     {
+//       unique=true;
+//     }
+//     a=document.getElementById('adminSelect'+valuesSelect[pathPoints[i]].id);
+//     a.style.fill="#808080";
+//   }
+//   if(unique)
+//   {
+//     swal({
+//       content: {
+//         element: "input",
+//         attributes: {
+//           placeholder: "Enter the name of the path.",
+//           type: "text",
+//         },
+//       },
+//     })
+//     .then((inputValue)=>{
+//       if (inputValue === "") {
+//         swal("You need to write something!");
+//       }
+
+//       createCustomPath(inputValue);
+//     });
+//   }
+//   else{
+//     swal("The path aldready exists");
+//   }
+// }
+
+//   console.log(name);
+//   var lineId=data.length;
+//   var values=[];
+//   var id=valuesSelect.length;
+//   for(var i=0;i<pathPoints.length;i++)
+//   {
+//     var ele={};
+//     ele.x=valuesSelect[pathPoints[i]].x;
+//     ele.y=valuesSelect[pathPoints[i]].y;
+//     ele.select=0;
+//     ele.lineId=lineId;
+//     values.push(ele);
+//     ele.id=id;
+//     id++;
+//     valuesSelect.push(ele);
+//   }
+//   var line={name: name,lineId:lineId, select: 0,values:values};
+//   data.push(line);
+//   console.log(data);
+//   d3.selectAll(".line-group")
+//     .style("display","initial");
+//   d3.selectAll(".circle-group")
+//     .style("display","initial");
+//   d3.selectAll(".circle-normal")
+//     .style("display","initial");
+//   d3.selectAll(".circle-select")
+//     .style("display","none");
+//   d3.selectAll(".admin-select")
+//     .style("display","none");
+//   d3.select("#startBtn")
+//     .style("display","none");
+//   d3.select("#endBtn")
+//     .style("display","none");
+
+
+//   $('input[name=admin-page]').prop('checked',false);
+
+
+});
+
+});
+
+		}
+</script>
+
+	</body>
+</html>

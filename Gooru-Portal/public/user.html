@@ -1,0 +1,1920 @@
+<html ng-app="mySuperApp">
+	<head>
+		<meta charset="utf-8"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Precision Learning in Enterprise - IIIT Bangalore</title>
+		<link rel="icon" href="data:,">
+		<link rel="stylesheet" href="./styles/style.css" />
+		<link rel="stylesheet" href="./styles/ionic.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<!-- <script src="https://d3js.org/d3.v4.js"></script> -->
+		<script src="https://d3js.org/d3.v5.min.js"></script>
+    	<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.9.1/d3.min.js"></script> -->
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!-- <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script> -->
+		<script src="https://d3js.org/d3.v5.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <!-- <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet"> -->
+    <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+	</head>
+	<body>
+
+<!--------CHATBOT----------------------------------->
+
+		<div id="webchat"/>
+<script src="https://storage.googleapis.com/mrbot-cdn/webchat-latest.js"></script>
+// Or you can replace latest with a specific version
+<script>
+  WebChat.default.init({
+    selector: "#webchat",
+    initPayload: "/get_started",
+    customData: {"language": "en"}, // arbitrary custom data. Stay minimal as this will be added to the socket
+    socketUrl: "http://localhost:5005",
+    socketPath: "/socket.io/",
+    title: "Vidya",
+    subtitle: "",
+  })
+
+
+</script>
+
+
+
+
+		<!-- TITLE -->
+		<div class="header">
+			<div class="" style="position:absolute;"><img class='iiitb-logo' src="./images/mphasis_iiitb.png" alt="IIIT-Bangalore_Logo" /></div>
+			<div class="display-inline">Precision Learning in Enterprise</div>
+			<!-- <div><input class='logoutbtn' type="text" placeholder="Search.."></div> -->
+			<div class="logoutbtn"><input class="adminbutton" type="submit" value="Logout" /></div>
+			<!-- <div class="addmoreadmin">Welcome to the portal <p id="username">Prakhar</p></div> -->
+		</div>
+
+
+		<div id="page" ng-controller="PopupCtrl">
+		    <div id="maincontent">
+		    		<div id="myNav1" class="overlay">
+						  <a href="javascript:void(0)" class="closebtn" onclick="closeNav1()">&times;</a>
+						  <div id='resource'>
+							  <p id="overlay-content-heading"></p>
+							  <div class="overlay-content" id="overlay-content"></div>
+							  <div class="overlay-content" id="overlay-content-btn"></div>
+							  <div class="overlay-content" id="overlay-content-stats"></div>
+						  </div>
+					</div>
+
+					<!-- <div id="myNav2" class="overlay">
+						  <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">&times;</a>
+						  <div id='quiz'>
+							  <h1 id="quiz-name"></h1>
+							  <button class="overlay-content" id="submit-button">Submit Answers</button>
+							  <button class="overlay-content" id="next-question-button">Next Question</button>
+							  <button class="overlay-content" id="prev-question-button">Previous</button>
+							  <div id="quiz-results">
+								    <p id="quiz-results-message"></p>
+								    <p id="quiz-results-score"></p>
+							    <button onclick="closeNav2();">Submit Score</button>
+							  </div>
+						  </div>
+					</div>
+ -->				
+		    		<div id="menu">
+		    			<input type='button' class="active" id="explore" value='Explore Learnings' onclick="ToggleLearnings('explore');"></input>
+  						<!-- <input type='button' class="" id="exploit" value='Paths Enrolled' onclick="ToggleLearnings('exploit');"></input> -->
+		    		</div>
+					<div id="learn" style="margin-bottom:-54%;width:60%;display:inline-block;">
+							<div id="learningpathwaytitle">
+							</div>
+							<div id="learningpathwaydesc">
+							</div> 
+<!-- 
+							<div id="myenrolleddropdown">
+								<div class="dropdown">
+								  <button onclick="myFunction()" class="dropbtn">Show Pathways</button>
+								  <div id="mypathenrolled" class="dropdown-content">
+								    <input type="text" placeholder="Search.." id="mypathenrolledinput" onkeyup="filterFunction()">
+								  </div>
+								</div>
+							</div>
+ -->	
+
+
+
+
+							<div id="learningpathwaygraph">
+							</div>
+
+							<div id="chart_buttons">
+									<div style="display: inline-block;">
+											<span>Pathways</span>
+										<label class="switch">
+											<input type="checkbox" name="toggle-lines" checked>
+											<span class="slider round"></span>
+										</label>
+									</div>
+									<!-- <div style="display: inline-block;">
+										<span>Resources</span>
+										<label class="switch">
+												<input type="checkbox" name="toggle-points">
+												<span class="slider round"></span>
+										</label>
+									</div> -->
+									<div style="display: inline-block;">
+											<span>Panning</span>
+											<!-- <span>Panning</span> -->
+											<label class="switch">
+													<input type="checkbox" name="enable-zoom">
+													<span class="slider round"></span>
+											</label>
+									</div>
+									<div style="display: inline-block;">
+										<button type="button" class="btn btn-default btn-sm" id="zoomOut">
+								          <span class="glyphicon glyphicon-zoom-out"></span> Zoom-out
+								        </button>
+						                
+						            </div> 
+								<!-- 	<div style="display: inline-block;">
+										
+											<span>Select Path</span>
+											<label class="switch">
+													<input type="checkbox" name="select-path">
+													<span class="slider round"></span>
+											</label>
+										</div>
+ -->							</div>
+
+
+
+ 									
+
+							<div  id="learningpathwayinfo" style="bottom:35px;position: relative;">
+								<div style="display: inline-block; background-color: #f7f7f7;">
+									<span><b>Resources</b><span> <p id="noResource" style="font-size: 16px;text-align: center;"></p>
+								</div>	
+
+								<div style="display: inline-block;background-color: #f7f7f7;">
+									<span><b>Learning Pathways</b><span> <p id="noPaths" style="font-size: 16px;text-align: center;"></p>
+								</div>	
+
+								<div style="display: inline-block;float: right;">
+									<div class="info">
+										<i class="fa fa-info-circle" id="information"></i>	
+										<div>
+											<!-- <h3>Information</h3> -->	
+									        <p><b>Pathways</b> - Toggle this to show/hide learning paths</p>
+									        <p><b>Panning</b> - Toggle this to enable/diable panning feature in chart</p>
+									        <p><b>Zoom-in</b> - Click and drag in the chart</p>
+									        <p><b>Zoom-out</b> - Double click in chart area</p>
+									    </div>
+								    </div>
+								</div>	
+							</div>
+					</div>
+
+					<div class="youtube"
+     					id=""
+     					style="width: 700px; height: 350px;">
+					</div>
+
+				<!-- <body class="padding" ng-controller="PopupCtrl"> -->
+    <button class="button button-positive" ng-click="showAlert()" style="display: relative;">
+      Show summary!
+    </button>
+    
+    <script id="popup-template.html" type="text/ng-template">
+      <input ng-model="data.wifi" type="text" placeholder="Password">
+    </script>
+  <!-- </body> -->
+<!-- 
+        		<div id="learningpathwaylist">
+
+        		</div> -->
+		    </div>
+
+		    <div id="genericconcent">
+		    	<div id="menucontentupload">
+	    		   <input type="text" id="searchgeneric" onkeyup="searchFunction()" placeholder="Search for maps...">
+					    <ul id="searchUL">
+
+						</ul>
+				</div>
+		    </div>
+		</div>
+
+
+
+
+
+<script type="text/javascript">
+
+
+
+//summary_variable
+
+
+
+
+
+
+
+
+	
+function play_video(video_id)
+    {
+
+// var div = document.createElement('div');
+// div.className = "youtube";
+// div.id = video_id;
+// div.style.height="281px";
+// div.style.width="500px";
+var videos = document.getElementsByClassName("youtube");
+   var nb_videos = videos.length;
+   console.log(videos.length);
+    for (var i=0; i<nb_videos; i++) {
+        // Based on the YouTube ID, we can easily find the thumbnail image
+        videos[i].style.backgroundImage = 'url(http://i.ytimg.com/vi/' + videos[i].id + '/sddefault.jpg)';
+
+        // Overlay the Play icon to make it look like a video player
+        var play = document.createElement("div");
+        play.setAttribute("class","play");
+        videos[i].appendChild(play);
+
+        videos[i].onclick = function() {
+            // Create an iFrame with autoplay set to true
+            var iframe = document.createElement("iframe");
+            iframe.id="iframe_id";
+            var iframe_url = "https://www.youtube.com/embed/" + this.id + "?autoplay=1&autohide=1";
+            if (this.getAttribute("data-params")) iframe_url+='&'+this.getAttribute("data-params");
+            iframe.setAttribute("src",iframe_url);
+            iframe.setAttribute("frameborder",'0');
+
+            // The height and width of the iFrame should be the same as parent
+            iframe.style.width  = this.style.width;
+            iframe.style.height = this.style.height;
+
+            // Replace the YouTube thumbnail with YouTube Player
+            this.parentNode.replaceChild(iframe, this);
+        }
+    }
+
+
+
+    // var videos = document.getElementsByClassName("youtube")[0];
+    // console.log(videos.id);
+    // videos.style.backgroundImage = 'url(http://i.ytimg.com/vi/' + videos.id + '/sddefault.jpg)';
+
+    //     // Overlay the Play icon to make it look like a video player
+
+    //     var play = document.createElement("div");
+    //     play.setAttribute("class","play");
+    //     videos.appendChild(play);
+
+    //     videos.onclick = function() {
+    //         // Create an iFrame with autoplay set to true
+    //         var iframe = document.createElement("iframe");
+    //         var iframe_url = "https://www.youtube.com/embed/" + this.id + "?autoplay=1&autohide=1";
+    //         if (this.getAttribute("data-params")) iframe_url+='&'+this.getAttribute("data-params");
+    //         iframe.setAttribute("src",iframe_url);
+    //         iframe.setAttribute("frameborder",'0');
+
+    //         // The height and width of the iFrame should be the same as parent
+    //         iframe.style.width  = this.style.width;
+    //         iframe.style.height = this.style.height;
+    //         iframe.style.left = this.style.left;
+
+    //         // Replace the YouTube thumbnail with YouTube Player
+    //         this.parentNode.replaceChild(iframe, this);
+    //     }
+    }
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+	<!-- FOOTER -->
+	<footer style="position: fixed;left: 0px;bottom: 1px;width: 100%;background-color: #004C98;color: white;text-align: center;">
+		<p>Copyright @ 2019 IIIT-Bangalore</p>
+	</footer>
+
+	<script type="text/javascript">
+		window.onload = function() {
+			document.getElementById("learningpathwaygraph").style.display = 'none';
+			document.getElementById("chart_buttons").style.display = 'none';
+			document.getElementById("learningpathwayinfo").style.display = 'none';
+			var content = showAllMaps();
+			document.getElementById('searchUL').innerHTML = content;
+			document.getElementsByClassName("overlay")[0].style.display = 'none';
+			document.getElementsByClassName("overlay")[0].style.display = 'none';
+		};
+
+		function ToggleLearnings(id){
+			if (id==='explore'){
+				if (document.getElementById("explore").className==="active"){
+					// do nothing
+				}else{
+					document.getElementById("exploit").className = "";
+					document.getElementById(id).className = "active";
+					document.getElementById("learningpathwaygraph").style.display = 'inline-block';
+					document.getElementById("chart_buttons").style.display = 'inline-block';
+				}
+			} else{
+				document.getElementById("explore").className = "";
+				document.getElementById(id).className = "active";
+				document.getElementById("learningpathwaygraph").style.display = 'none';
+				document.getElementById("chart_buttons").style.display = 'none';
+			}
+		}
+
+		function showAllMaps(){
+			var URL= 'http://0.0.0.0:5555/getMaps'
+			var content='';
+			// content to be filled thorugh apI call
+			// content = "<li><a href='#' id=101 onclick='openFacet(101);'>Reinforcement Learning</a></li>\
+			// <li><a href='#'' id=102 onclick=''>Practical Machine Learning</a></li>"fo
+			$.ajax({
+			    type: 'GET',
+			    url: URL,
+			    contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+			    success: function(data) {
+						var fdata = data.split('END')
+						for (var i=0; i< fdata.length-1 ; i++){
+								content += "<li>"+fdata[i]+"</li>"
+						}
+						document.getElementById('searchUL').innerHTML = content;
+					}
+			});
+		}
+
+		function showmodulepath(learning){
+			// make api call to get the list  [TODO]
+
+			document.getElementById('searchresult').innerHTML = content;
+			// document.getElementById('whichoneselected').innerHTML = 'General';
+		}
+
+		function showpersonalsearch() {
+			// make api call to get the list  [TODO]
+			var content = "<a href='#'>Theoretical Physics Competency & Path</a>"+
+						  "<a href='#'>Practical Deep Learning Competency & Path</a>"
+			document.getElementById('searchresult').innerHTML = content;
+			// document.getElementById('whichoneselected').innerHTML = 'Personal';
+
+		}
+
+		function showPossibelLearningPaths(element){
+			// CALL API TO GET PATHS for element.id
+			if (element.id === '101_lp'){
+				var content = "<b>Learning Paths</b> \
+								<a id='101_lp_1' onclick='openPath(this);'><div class='modules'><div id='paths'><b>Mastering Maths in RL</b></div></div></a> \
+				   			   <a id='101_lp_2' onclick='openPath(this);'><div class='modules'><div id='paths'><b>Zero to Hero | Q-Learning</b></div></div></a>"
+				document.getElementById('learningpathwaylist').innerHTML = content;
+			}
+		}
+
+var bool =0;
+		function openMap(facetId){
+			
+			document.getElementById(facetId.toString()).className = "active";
+			var facetName = document.getElementById(facetId).text;
+
+			already_rendered = Object.keys(document.getElementById("learningpathwaygraph").children).length;
+
+			//document.getElementById('facetName').innerHTML = facetName;
+			//document.getElementsByClassName("pathbutton")[0].setAttribute("id", facetId+'_lp');
+			//document.getElementsByClassName("pathbutton")[0].style.display = 'block';
+			//document.getElementById('facetName').style.display = 'block';
+			var URL = 'http://0.0.0.0:5555/getpath'
+			console.log(URL);
+			var dataString = "id="+facetId;
+			console.log(dataString);
+			$.ajax({
+			    type: 'POST',
+			    url: URL,
+   			  data: dataString,
+			    success: function(data) {
+						d = data.split('/');
+						competency_loc = data+'/'+d.slice(-1)+'_map.csv'
+						console.log(competency_loc);
+						path_loc = data+'/'+d.slice(-1)+'_path.csv'
+						console.log(path_loc);
+						if (already_rendered==2){
+							console.log("prakhar");
+							console.log(document.getElementById("learningpathwaygraph").innerHTML);
+							document.getElementById("learningpathwaygraph").innerHTML = "";
+						}
+						drawCompetencies(competency_loc, path_loc)
+						document.getElementById("learningpathwaygraph").style.display = 'inline-block';
+						document.getElementById("chart_buttons").style.display = 'inline-block';
+						document.getElementById("learningpathwayinfo").style.display = 'block';
+						document.getElementById("learningpathwaytitle").innerHTML = "<font size=\"4\"><b>"+facetName+"</b></font>";
+						document.getElementById("learningpathwaydesc").innerHTML = "<font color=\"green\" size=\"2\">The below fig. shows automatically generated competency map and learning pathways from NCERT books on mathematics for class 5 to 10</font>";
+
+			    }
+			});
+
+			if(bool==0)
+			{
+				console.log("dont hide function called");
+				bool=1;
+				document.getElementById("learn").style.display="inline-block";
+				// document.getElementsByClassName("youtube")[0].style.display="none";
+			}
+			else
+			{if(bool==1)
+			{
+				console.log("hide function called");
+				bool=0;
+				document.getElementById("learn").style.display ="none";
+				play_video();
+				// document.getElementsByClassName("youtube")[0].style.display="inline-block";
+			}}
+		}
+
+		function openPath(country){
+			var content = ''
+		}
+
+		function openResource(d, type, clickForSelection){
+			var div = document.getElementById('learningpathwaylist');
+			while(div.firstChild){
+			    div.removeChild(div.firstChild);
+			}
+console.log("came here");
+			if (type=='resource' && clickForSelection){
+				// call map table
+				content = "<div class='modules'><div id='heading'><b>Basic Maths</b></div><div id='links'><table><tr><td><a href='#'>Basic ML Maths - Chapter 1</a></td><td><a href='#'>Concise Introduction to Elementary Maths - Medium Blog</a></td></tr></table></div></div>"
+				div.insertAdjacentHTML('beforeend', content);
+			} 
+			else if (type=='path' && clickForSelection){
+				// call path table
+				pathpoints = d.values;
+				pathnumber = d.lineId;
+				content = "";
+				for (i=0; i<pathpoints.length; i++){
+					topic = pathpoints[i].topic
+					content += "<div class='modules'><div id='heading'><b>Step: "+pathpoints[i].sequence_id+"</b><div style='float: right;'><font size='3' color='#004C98'><b>Path: "+pathnumber+"</b></font></div></div>"
+					content += "<div id='links'><b>Topic</b>: "+topic+"<br><b>Difficulty Level</b>: "+pathpoints[i].doc_volume+"<br><br>"
+					content += "<table><tr><td><a href='#' onclick='openNav1(pathnumber, topic)'>Resource - 1</a></td>"
+					content += "<td><a href='#' onclick='openNav2()'>Take Assessment</a></td></tr></table></div></div>"
+				}
+				div.insertAdjacentHTML('beforeend', content);
+			}
+			// button  = '<div class="followpath"><input class="adminbutton" id="P_'+pathnumber+'" type="submit" value="Enroll" onclick="enroll(pathnumber)"></input></div><span id="enrolledtxt"></span>'
+			// div.insertAdjacentHTML('beforeend', button);
+		}
+
+
+		function searchFunction() {
+		    var input, filter, ul, li, a, i, txtValue;
+		    input = document.getElementById("searchgeneric");
+		    filter = input.value.toUpperCase();
+		    ul = document.getElementById("searchUL");
+		    li = ul.getElementsByTagName("li");
+		    for (i = 0; i < li.length; i++) {
+		        a = li[i].getElementsByTagName("a")[0];
+		        txtValue = a.textContent || a.innerText;
+		        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+		            li[i].style.display = "";
+		        } else {
+		            li[i].style.display = "none";
+		        }
+		    }
+		}
+
+		function enroll(enrollId){
+			var btn = document.getElementById('P_'+enrollId);
+	        btn.disabled = true;
+	        document.getElementById('enrolledtxt').innerHTML = 'You have been enrolled';
+
+	        ///////
+	          var node = document.createElement("a");
+  			  var textnode = document.createTextNode('Path '+enrollId);
+  			  node.appendChild(textnode);
+  			  document.getElementById("mypathenrolled").appendChild(node);	        
+		}
+
+		function myFunction() {
+ 			 document.getElementById("mypathenrolled").classList.toggle("show");
+		}
+
+
+		/* Open */
+		function openNav1(p, t) {
+		  document.getElementById("myNav1").style.display = "block";
+		  //document.getElementById("myNav1").style.background-color = rgba(0,0,0, 0.8);
+
+		  pathnum=p
+		  topic = t
+		  url = "https://www.youtube.com/embed/tgbNymZ7vqY"
+		  document.getElementById("overlay-content-heading").innerHTML = "<div style='float: left; color: white; font-size: 30px;'>Path: "+ pathnum +"</div><br>"
+		  document.getElementById("overlay-content-heading").innerHTML += "<div style='float: left; color: white; font-size: 15px;'>Topics: "+ topic +"</div>"
+  		  document.getElementById("overlay-content").innerHTML = '<iframe width="820" height="500" src='+url+'></iframe>'
+  		  //document.getElementById("overlay-content").innerHTML = '<embed src="./termpaper-ms2019012.pdf" type="application/pdf" width="100%" height="700px"/>'
+
+  		  button_like_dislike = '<button class="dislike" onclick="captureReaction(0);"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></button><button class="like" onclick="captureReaction(1);"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>'
+		  document.getElementById("overlay-content-btn").innerHTML = button_like_dislike
+
+
+		  // get like dislike for this resource id
+		  // get_likes_dislikes();
+		  document.getElementById("overlay-content-stats").innerHTML = '<p style="font-size: 15px;">21 1</p>'
+		}
+
+		function captureReaction(reaction){
+			// store reactions
+		}
+
+		/* Close */
+		function closeNav1() {
+		  document.getElementById("myNav1").style.display = "none";
+		  // document.getElementById("myNav1").style.background-color = rgba(0,0,0, 0.0);
+		} 
+
+		function get_likes_dislikes(rid){
+			var URL = 'http://0.0.0.0:5555/resourcereactions'
+			var dataString = "rid="+e;
+			$.ajax({
+			    type: 'POST',
+			    url: URL,
+			    data: dataString,
+			    success: function(data) {
+			      	console.log(data);
+			    }
+			});
+		}
+
+		function openNav2() {
+		  document.getElementById("myNav2").style.display = "block";
+		  //document.getElementById("myNav2").style.background-color = rgba(0,0,0, 0.8);
+
+		  var all_questions = [{
+		  question_string: "What is 5 times 6?",
+		  choices: {
+		    correct: "30",
+		    wrong: ["11", "1", "20"]
+		  }
+		}, {
+		  question_string: "Vernon has 30 cents. Victor has one more than twice as many cents as Vernon. How many cents does Victor have?",
+		  choices: {
+		    correct: "61 cents",
+		    wrong: ["62 cents", "65 cents", "70 cents"]
+		  }
+		}];
+		launchQuiz(all_questions);
+		}
+
+		function closeNav2() {
+		  document.getElementById("myNav2").style.display = "none";
+		  // document.getElementById("myNav2").style.background-color = rgba(0,0,0, 0.0);
+		} 
+
+		function filterFunction() {
+		  var input, filter, ul, li, a, i;
+		  input = document.getElementById("mypathenrolledinput");
+		  filter = input.value.toUpperCase();
+		  div = document.getElementById("mypathenrolled");
+		  a = div.getElementsByTagName("a");
+		  for (i = 0; i < a.length; i++) {
+		    txtValue = a[i].textContent || a[i].innerText;
+		    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+		      a[i].style.display = "";
+		    } else {
+		      a[i].style.display = "none";
+		    }
+		  }
+		}
+
+		
+
+		// An object for a Quiz, which will contain Question objects.
+		var Quiz = function(quiz_name) {
+		  // Private fields for an instance of a Quiz object.
+		  this.quiz_name = quiz_name;
+		  
+		  // This one will contain an array of Question objects in the order that the questions will be presented.
+		  this.questions = [];
+		}
+
+		// A function that you can enact on an instance of a quiz object. This function is called add_question() and takes in a Question object which it will add to the questions field.
+		Quiz.prototype.add_question = function(question) {
+		  // Randomly choose where to add question
+		  var index_to_add_question = Math.floor(Math.random() * this.questions.length);
+		  this.questions.splice(index_to_add_question, 0, question);
+		}
+
+		// A function that you can enact on an instance of a quiz object. This function is called render() and takes in a variable called the container, which is the <div> that I will render the quiz in.
+		Quiz.prototype.render = function(container) {
+		  // For when we're out of scope
+		  var self = this;
+		  
+		  // Hide the quiz results modal
+		  $('#quiz-results').hide();
+		  
+		  // Write the name of the quiz
+		  $('#quiz-name').text(this.quiz_name);
+		  
+		  // Create a container for questions
+		  var question_container = $('<div>').attr('id', 'question').insertAfter('#quiz-name');
+		  
+		  // Helper function for changing the question and updating the buttons
+		  function change_question() {
+		    self.questions[current_question_index].render(question_container);
+		    $('#prev-question-button').prop('disabled', current_question_index === 0);
+		    $('#next-question-button').prop('disabled', current_question_index === self.questions.length - 1);
+		   
+		    
+		    // Determine if all questions have been answered
+		    var all_questions_answered = true;
+		    for (var i = 0; i < self.questions.length; i++) {
+		      if (self.questions[i].user_choice_index === null) {
+		        all_questions_answered = false;
+		        break;
+		      }
+		    }
+		    $('#submit-button').prop('disabled', !all_questions_answered);
+		  }
+		  
+		  // Render the first question
+		  var current_question_index = 0;
+		  change_question();
+		  
+		  // Add listener for the previous question button
+		  $('#prev-question-button').click(function() {
+		    if (current_question_index > 0) {
+		      current_question_index--;
+		      change_question();
+		    }
+		  });
+		  
+		  // Add listener for the next question button
+		  $('#next-question-button').click(function() {
+		    if (current_question_index < self.questions.length - 1) {
+		      current_question_index++;
+		      change_question();
+		    }
+		  });
+		 
+		  // Add listener for the submit answers button
+		  $('#submit-button').click(function() {
+		    // Determine how many questions the user got right
+		    var score = 0;
+		    for (var i = 0; i < self.questions.length; i++) {
+		      if (self.questions[i].user_choice_index === self.questions[i].correct_choice_index) {
+		        score++;
+		      }
+		      
+		   $('#quiz-retry-button').click(function(reset) {
+		      quiz.render(quiz_container);
+		   });
+		    
+		    }
+		    
+		   
+		    
+		    // Display the score with the appropriate message
+		    var percentage = score / self.questions.length;
+		    console.log(percentage);
+		    var message;
+		    if (percentage === 1) {
+		      message = 'Great job!'
+		    } else if (percentage >= .75) {
+		      message = 'You did alright.'
+		    } else if (percentage >= .5) {
+		      message = 'Better luck next time.'
+		    } else {
+		      message = 'Maybe you should try a little harder.'
+		    }
+		    $('#quiz-results-message').text(message);
+		    $('#quiz-results-score').html('You got <b>' + score + '/' + self.questions.length + '</b> questions correct.');
+		    $('#quiz-results').slideDown();
+		    $('#submit-button').slideUp();
+		    $('#next-question-button').slideUp();
+		    $('#prev-question-button').slideUp();
+		    $('#quiz-retry-button').sideDown();
+		    
+		  });
+		  
+		  // Add a listener on the questions container to listen for user select changes. This is for determining whether we can submit answers or not.
+		  question_container.bind('user-select-change', function() {
+		    var all_questions_answered = true;
+		    for (var i = 0; i < self.questions.length; i++) {
+		      if (self.questions[i].user_choice_index === null) {
+		        all_questions_answered = false;
+		        break;
+		      }
+		    }
+		    $('#submit-button').prop('disabled', !all_questions_answered);
+		  });
+		}
+
+		// An object for a Question, which contains the question, the correct choice, and wrong choices. This block is the constructor.
+		var Question = function(question_string, correct_choice, wrong_choices) {
+		  // Private fields for an instance of a Question object.
+		  this.question_string = question_string;
+		  this.choices = [];
+		  this.user_choice_index = null; // Index of the user's choice selection
+		  
+		  // Random assign the correct choice an index
+		  this.correct_choice_index = Math.floor(Math.random(0, wrong_choices.length + 1));
+		  
+		  // Fill in this.choices with the choices
+		  var number_of_choices = wrong_choices.length + 1;
+		  for (var i = 0; i < number_of_choices; i++) {
+		    if (i === this.correct_choice_index) {
+		      this.choices[i] = correct_choice;
+		    } else {
+		      // Randomly pick a wrong choice to put in this index
+		      var wrong_choice_index = Math.floor(Math.random(0, wrong_choices.length));
+		      this.choices[i] = wrong_choices[wrong_choice_index];
+		      
+		      // Remove the wrong choice from the wrong choice array so that we don't pick it again
+		      wrong_choices.splice(wrong_choice_index, 1);
+		    }
+		  }
+		}
+
+		// A function that you can enact on an instance of a question object. This function is called render() and takes in a variable called the container, which is the <div> that I will render the question in. This question will "return" with the score when the question has been answered.
+		Question.prototype.render = function(container) {
+		  // For when we're out of scope
+		  var self = this;
+		  
+		  // Fill out the question label
+		  var question_string_h2;
+		  if (container.children('h2').length === 0) {
+		    question_string_h2 = $('<h2>').appendTo(container);
+		  } else {
+		    question_string_h2 = container.children('h2').first();
+		  }
+		  question_string_h2.text(this.question_string);
+		  
+		  // Clear any radio buttons and create new ones
+		  if (container.children('input[type=radio]').length > 0) {
+		    container.children('input[type=radio]').each(function() {
+		      var radio_button_id = $(this).attr('id');
+		      $(this).remove();
+		      container.children('label[for=' + radio_button_id + ']').remove();
+		    });
+		  }
+		  for (var i = 0; i < this.choices.length; i++) {
+		    // Create the radio button
+		    var choice_radio_button = $('<input>')
+		      .attr('id', 'choices-' + i)
+		      .attr('type', 'radio')
+		      .attr('name', 'choices')
+		      .attr('value', 'choices-' + i)
+		      .attr('checked', i === this.user_choice_index)
+		      .appendTo(container);
+		    
+		    // Create the label
+		    var choice_label = $('<label>')
+		      .text(this.choices[i])
+		      .attr('for', 'choices-' + i)
+		      .appendTo(container);
+		  }
+		  
+		  // Add a listener for the radio button to change which one the user has clicked on
+		  $('input[name=choices]').change(function(index) {
+		    var selected_radio_button_value = $('input[name=choices]:checked').val();
+		    
+		    // Change the user choice index
+		    self.user_choice_index = parseInt(selected_radio_button_value.substr(selected_radio_button_value.length - 1, 1));
+		    
+		    // Trigger a user-select-change
+		    container.trigger('user-select-change');
+		  });
+		}
+
+		// "Main method" which will create all the objects and render the Quiz.
+		function launchQuiz(all_questions){
+		  // Create an instance of the Quiz object
+		  var quiz = new Quiz('Quiz');
+		  
+		  // Create Question objects from all_questions and add them to the Quiz object
+		  for (var i = 0; i < all_questions.length; i++) {
+		    // Create a new Question object
+		    var question = new Question(all_questions[i].question_string, all_questions[i].choices.correct, all_questions[i].choices.wrong);
+		    
+		    // Add the question to the instance of the Quiz object that we created previously
+		    quiz.add_question(question);
+		  }
+		  
+		  console.log('HIT');
+		  
+		  document.getElementById('quiz').innerHTML = '<h1 id="quiz-name"></h1><button id="submit-button">Submit Answers</button><button id="next-question-button">Next Question</button><button id="prev-question-button">Previous</button> <div id="quiz-results"><p id="quiz-results-message"></p><p id="quiz-results-score"></p><button onclick="closeNav2();">Submit Score</button></div></div>'
+		  // Render the quiz
+		  var quiz_container = $('#quiz');
+		  console.log(quiz_container);
+		  quiz.render(quiz_container);
+		}
+	</script>
+
+	<script>
+		var selectedPoints=[-1,-1];
+		var pathPoints=[];
+		var createPath=false;
+		$(document).ready(function(){
+		  $('input[name=enable-zoom]').click(function(){
+		    if($(this).prop("checked") == true){
+		      d3.select("#zoomRect")
+		      .style("pointer-events","all")
+		      d3.select(".brush")
+		      .style("display","none")
+		      .style("pointer-events","none")
+		      d3.select("#zoomRect")
+		      .style("cursor","all-scroll");
+		    }
+		    else{
+		      d3.select("#zoomRect")
+		      .style("pointer-events","none")
+		      d3.select(".brush")
+		      .style("display","initial")
+		      .style("pointer-events","all")
+		    }
+		  });
+		  $('input[name=toggle-lines]').click(function(){
+		      if($(this).prop("checked") == true){
+			d3.selectAll(".line-group")
+			  .style("display","initial");
+		      }
+		      else if($(this).prop("checked") == false){
+			d3.selectAll(".line-group")
+			  .style("display","none");
+		      }
+		  });
+		  $('input[name=toggle-points]').click(function(){
+		    if($(this).prop("checked") == true){
+		      d3.selectAll(".not_selected_circle")
+			.style("display","none");
+		    }
+		    else if($(this).prop("checked") == false){
+		      d3.selectAll(".not_selected_circle")
+			.style("display","initial");
+		    }
+		});
+		  $('input[name=select-path]').click(function(){
+		    if($(this).prop("checked") == true){
+		      d3.selectAll(".line-group")
+			.style("display","none");
+		      d3.selectAll(".circle-group")
+		      .style("display","none");
+		      d3.selectAll(".circle-normal")
+		      .style("display","none");
+		      d3.selectAll(".circle-select")
+		      .style("display","initial");
+		      $('input[name=toggle-lines]').prop('checked',false);
+		      selectedPoints=[-1,-1];
+		    }
+		    else if($(this).prop("checked") == false){
+		      d3.selectAll(".line-group")
+			.style("display","initial");
+		      d3.selectAll(".circle-group")
+			.style("display","initial");
+		      d3.selectAll(".circle-normal")
+			.style("display","initial");
+		      d3.selectAll(".circle-select")
+			.style("display","none");
+		      selectedPoints=[-1,-1];
+		    }
+		  });
+		  $('input[name=admin-page]').click(function(){
+		    if($(this).prop("checked") == true){
+		      d3.selectAll(".line-group")
+			.style("display","none");
+		      d3.selectAll(".circle-group")
+		      .style("display","none");
+		      d3.selectAll(".circle-normal")
+		      .style("display","none");
+		      d3.selectAll(".circle-select")
+		      .style("display","none");
+		      d3.selectAll(".admin-select")
+		      .style("display","initial");
+		      console.log(d3.select("#startBtn"))
+		      d3.select("#startBtn")
+			.style("display","initial");
+		      $('input[name=toggle-lines]').prop('checked',false);
+		      $('input[name=select-path]').prop('checked',false);
+		    }
+		    else if($(this).prop("checked") == false){
+		      d3.selectAll(".line-group")
+			.style("display","initial");
+		      d3.selectAll(".circle-group")
+			.style("display","initial");
+		      d3.selectAll(".circle-normal")
+			.style("display","initial");
+		      d3.selectAll(".circle-select")
+			.style("display","none");
+		      d3.selectAll(".admin-select")
+			.style("display","none");
+		      d3.select("#startBtn")
+			.style("display","none");
+		      d3.select("#endBtn")
+			.style("display","none");  
+		    }
+		  });
+		});
+
+	</script>
+	<script>
+
+
+var summary;
+
+angular.module('mySuperApp', ['ionic'])
+.controller('PopupCtrl',function($scope, $ionicPopup, $timeout) {
+
+
+
+ // Triggered on a button click, or some other target
+ $scope.showPopup = function() {
+   $scope.data = {}
+console.log("came here");
+   // An elaborate, custom popup
+   var myPopup = $ionicPopup.show({
+     template: '<input type="password" ng-model="data.wifi">',
+     title: 'Enter Wi-Fi Password',
+     subTitle: 'Please use normal things',
+     scope: $scope,
+     buttons: [
+       { text: 'Cancel' },
+       {
+         text: '<b>Save</b>',
+         type: 'button-positive',
+         onTap: function(e) {
+           if (!$scope.data.wifi) {
+             //don't allow the user to close unless he enters wifi password
+             e.preventDefault();
+           } else {
+             return $scope.data.wifi;
+           }
+         }
+       },
+     ]
+   });
+   myPopup.then(function(res) {
+     console.log('Tapped!', res);
+   });
+   $timeout(function() {
+      myPopup.close(); //close the popup after 3 seconds for some reason
+   }, 3000);
+  };
+   // A confirm dialog
+   $scope.showConfirm = function() {
+     var confirmPopup = $ionicPopup.confirm({
+       title: 'Consume Ice Cream',
+       template: 'Are you sure you want to eat this ice cream?'
+     });
+     confirmPopup.then(function(res) {
+       if(res) {
+         console.log('You are sure');
+       } else {
+         console.log('You are not sure');
+       }
+     });
+   };
+
+   // An alert dialog
+   $scope.showAlert = function() {
+     var alertPopup = $ionicPopup.alert({
+       title: 'Summary',
+       template: summary
+     });
+     alertPopup.then(function(res) {
+       console.log('Thank you for not eating my delicious ice cream cone');
+     });
+   };
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var play_video_bool=0;
+		// function to show the youtube video
+		function playVideo(d)
+		{
+
+			console.log("coming here");
+			console.log(d.resource);
+			//document.getElementsByClassName("youtube")[0].id = d.resource;
+			// div = document.getElementsByClassName("youtube");
+			// 			while(div.firstChild){
+			//     div.removeChild(div.firstChild);
+			// }
+			var iframe_url = "https://www.youtube.com/embed/" + d.resource + "?autoplay=1&autohide=1";
+			var iframe = document.createElement("iframe");
+			iframe.id="iframe_id";
+			iframe.setAttribute("src",iframe_url);
+            iframe.setAttribute("frameborder",'0');
+            iframe.style.width="750px";
+            iframe.style.height="350px";
+			//play_video(d.resource);
+			summary = d.summary;
+			console.log(summary);
+			if(play_video_bool==1)
+			{
+				var iframe_element = document.getElementById("iframe_id");
+				document.getElementsByClassName("youtube")[0].removeChild(iframe_element);
+
+			}
+		else
+			play_video_bool=1;
+
+			console.log(document.getElementsByClassName("youtube")[0].childNodes);
+			document.getElementsByClassName("youtube")[0].appendChild(iframe);
+
+			
+		}
+
+		function drawCompetencies(c, p){
+
+			var data=[{name:"Path",select:0,lineId:0,values:[]}];
+			d3.csv(p.split('/').slice(-1)[0]).then((d)=> {
+			  console.log(d[0].id);
+			  console.log(d[0]);
+			  var numLines=0;
+			  // var minX,maxX,minY,maxY;
+			  var minX1=d3.min(d,e=>+e.X)-10;
+			  var maxX1=d3.max(d,e=>+e.X)+10;
+			  var minY1=d3.min(d,e=>+e.doc_volume)-10;
+			  var maxY1=d3.max(d,e=>+e.doc_volume)+10;
+			  
+			  
+			  // minX=2000;
+			  // maxX=2010;
+			  // minY=0;
+			  // maxY=250;
+			//   // console.log(minX);  
+			var idsPath=[];
+			var atemp;
+			  for(var i=0;i<d.length;i++)
+			  {
+			    if(atemp!=d[i].id)
+			    {
+			      atemp=d[i].id;
+			      idsPath.push(atemp);
+			      numLines++;
+			    }
+			    // console.log(atemp)
+			  }
+			  console.log(idsPath)
+			  document.getElementById('noPaths').innerHTML = numLines
+
+			  // numLines++;
+			  for(var i=0;i<numLines;i++)
+			  {
+			    data[i]={name:"Path "+i,select:0,lineId:i,values:[]};
+			  }
+			  for(var i=0;i<d.length;i++)
+			  {
+			    for(var j=0;j<numLines;j++)
+			    {
+			      if(d[i].id==idsPath[j])
+			      {
+			        break;
+			      }
+			    }
+			    d[i].lineId=j;
+			    data[j].values.push(d[i]);
+			    // data[j].values[].lineId=i;
+			  }
+			  // console.log(data[9]);
+			  
+			  var numResources = 0;
+			  for(var i=0; i<data.length; i++){
+			  		console.log(data[i]);
+			  		numResources += data[i].values.length;
+			  }
+			  document.getElementById('noResource').innerHTML = numResources;
+
+			d3.csv(c.split('/').slice(-1)[0]).then((d)=> {
+			  console.log(d);
+			  valuesSelect=[]
+			  for(var i=1;i<d.length;)
+			  {
+			  	valuesSelect.push({id:i,sequence_id:i,x:d[i].topic_volume,y:d[i].doc_volume,select:0,lineId:-1,topic:d[i].topic_name,resource:d[i].resource_id,summary:d[i].Summary})
+			  	i+=2;
+			  }
+			  console.log(valuesSelect);
+			  console.log('prrrrrraaaaaakpkkk');
+			  var minX2=d3.min(d,e=>+e.topic_volume)-10;
+			  var maxX2=d3.max(d,e=>+e.topic_volume)+10;
+			  var minY2=d3.min(d,e=>+e.doc_volume)-10;
+			  var maxY2=d3.max(d,e=>+e.doc_volume)+10;
+			  var minX=Math.min(minX1,minX2)
+			  var maxX=Math.max(maxX1,maxX2)
+			  var minY=Math.min(minY1,minY2)
+			  var maxY=Math.max(maxY1,maxY2)
+
+			// var width = 1200;
+			// var height = 700;
+			// var margin = 50;
+
+			var margin = {
+					        top: 40,
+					        right: 20,
+					        bottom: 30,
+					        left: 40
+					      },
+					      width = 830 - margin.left - margin.right,
+					      height = 580 - margin.top - margin.bottom;
+					    var duration = 250;
+
+					    var lineOpacity = "0.25";
+					    var lineOpacityHover = "0.85";
+					    var otherLinesOpacityHover = "0.1";
+					    var lineStroke = "1.5px";
+					    var lineStrokeHover = "2.5px";
+
+					    var circleOpacity = '0.85';
+					    var circleOpacityOnLineHover = "0.25"
+					    var circleRadius = 3;
+					    var circleRadiusHover = 6;
+					    var dminY = 0,
+					      dmaxY = 10;
+
+			var brush = d3.brush().on("end", brushended),
+			idleTimeout,
+			idleDelay = 350;
+
+			/* Add SVG */
+			var svg = d3.select("#learningpathwaygraph").append("svg")
+			  .attr("width", width + margin.left + margin.right)
+			  .attr("height", height + margin.top + margin.bottom)
+			  .append("g")
+			  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+			  var OldRange = (maxY - minY)  ;
+			  var NewRange = 10;
+			  var NewMin=0;
+			  // var NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin;
+			  
+			  /* Format Data */
+			  data.forEach(function(d) { 
+			    d.values.forEach(function(d) {
+			      d.x = +d.X;
+			      // d.y = +d.doc_volume;  
+			      d.y=((((+d.doc_volume) - minY) * NewRange) / OldRange) + NewMin  
+			      d.select=0;
+			    });
+			  });
+			  valuesSelect.forEach(function(d){
+			    d.y=((((d.y) - minY) * NewRange) / OldRange) + NewMin ;
+			  })
+
+			/* Scale */
+			var xScale = d3.scaleLinear()
+			  .domain([minX,maxX])
+			  .range([0, width]);
+
+			  var yScale = d3.scaleLinear()
+			  .domain([dminY,dmaxY])
+			  .range([height, 0]);
+
+
+			 /* Add Axis into SVG */
+			// var xAxis=svg.append("g")
+			//   .attr("class", "x axis")
+			//   .attr("transform", `translate(0, ${height-margin})`)
+			//   .call(d3.axisBottom(xScale).ticks(5));
+
+			// var yAxis=svg.append("g")
+			//   .attr("class", "y axis")
+			//   .call(d3.axisLeft(yScale).ticks(5))
+
+
+			var xAxis = d3.axisBottom(xScale).ticks(12),
+			    yAxis = d3.axisLeft(yScale).ticks(12)
+
+			var xAxis_zoom=svg.append("g")
+			    .attr("class", "axis axis--x")
+			  .attr("transform", `translate(0, ${height})`)
+			  // .attr("transform", "translate(0," + (height) + ")")
+			    .call(xAxis);
+
+			  var yAxis_zoom=svg.append("g")
+			    .attr("class", "axis axis--y")
+			    // .attr("transform", `translate(0,${-margin})`)
+			    .call(yAxis);
+
+			svg.selectAll(".domain")
+			  .style("display", "none");
+
+			svg.append("g")
+			  .attr("class", "brush")
+			  .call(brush);
+
+			  function idled() {
+			    idleTimeout = null;
+			  }
+			  var zoutSelection;
+			  $("#zoomOut").on("click",function(){
+			    // console.log(zoutSelection);
+			    xScale.domain([minX,maxX])
+			    yScale.domain([dminY,dmaxY]);
+			    var a=[[xScale.invert(zoutSelection[0][0]),yScale.invert(zoutSelection[0][1])],[xScale.invert(zoutSelection[1][0]),yScale.invert(zoutSelection[1][1])]];
+			    // console.log(a);
+			    var domSel=[[0,0],[0,0]];
+			    if(a[0][0]-a[0][0]/4>minX)
+			      domSel[0][0]=a[0][0]-a[0][0]/4;
+			    else  
+			      domSel[0][0]=minX;
+			    if(a[1][0]+a[1][0]/4<maxX)
+			      domSel[1][0]=a[1][0]+a[1][0]/4;
+			    else  
+			      domSel[1][0]=maxX;
+			    if(a[1][1]-a[1][1]/4>dminY)
+			      domSel[1][1]=a[1][1]-a[1][1]/4;
+			    else  
+			    {
+			      domSel[1][1]=dminY;
+			    }
+			    if(a[0][1]+a[0][1]/4<dmaxY)
+			      domSel[0][1]=a[0][1]+a[0][1]/4;
+			    else  
+			      domSel[0][1]=dmaxY;
+			    // console.log(domSel)
+
+			    zoutSelection[0][0]=xScale(domSel[0][0]);
+			    zoutSelection[1][0]=xScale(domSel[1][0]);
+			    zoutSelection[0][1]=yScale(domSel[0][1]);
+			    zoutSelection[1][1]=yScale(domSel[1][1]);
+
+			    xScale.domain([domSel[0][0],domSel[1][0]]);
+			    yScale.domain([domSel[1][1],domSel[0][1]]);
+			    svg.select(".brush").call(brush.move, null);
+			    zoomBrush();
+			  })
+
+			  function brushended() {
+			    var s = d3.event.selection;
+			    if (!s) {
+			      if (!idleTimeout) return idleTimeout = setTimeout(idled, idleDelay);
+			      xScale.domain([minX,maxX])
+			      yScale.domain([dminY,dmaxY]);
+			      // console.log("hihi");
+			    } else {
+			      // console.log(s);
+			      xScale.domain([s[0][0], s[1][0]].map(xScale.invert, xScale));
+			      yScale.domain([s[1][1], s[0][1]].map(yScale.invert, yScale));
+			      // console.log([s[0][0], s[1][0]].map(xScale.invert, xScale))
+			      // console.log([s[1][1], s[0][1]].map(yScale.invert, yScale))
+			      svg.select(".brush").call(brush.move, null);
+			      zoutSelection=s;
+			    }
+			    zoomBrush();
+			  }
+			  function zoomBrush() {
+			    var t = svg.transition().duration(750);
+			    // console.log("hi")
+			    svg.select(".axis--x").transition(t).call(xAxis);
+			    svg.select(".axis--y").transition(t).call(yAxis);
+			    svg.selectAll("circle")
+				.attr("cx", function(d) { return xScale(d.x); })
+				.attr("cy", function(d) { return yScale(d.y); });
+			    d3.selectAll(".point-text")
+				.attr("x",d=>xScale(d.x)-5)
+				.attr("y",d=>yScale(d.y)-10)
+			    // console.log(d3.selectAll(".point-text"))
+			    var line = d3.line()
+			      .curve(d3.curveMonotoneX)
+			      .x(d => xScale(d.x))
+			      .y(d => yScale(d.y));
+			    svg.selectAll(".line")
+				.attr('d', function(d){return line(d.values);})
+			  }
+
+
+			// Add a clipPath: everything out of this area won't be drawn.
+			var clip = svg.append("defs")
+			    .style("pointer-events", "all")
+			    .append("svg:clipPath")
+			    .style("pointer-events", "all")
+			    .attr("id", "clip")
+			    .append("svg:rect")
+			    .attr("width", width )
+			    .attr("height", height )
+			    .attr("x", 0)
+			    .attr("y", 0);
+			  
+			// Create the scatter variable, drawing that lie outside of the region bounded by the clipping path are not drawn.
+			var scatter = svg.append('g')
+			  .attr("clip-path", "url(#clip)")    
+			  .style("pointer-events","inherit")
+
+			// Set the zoom and Pan features: how much you can zoom, on which part, and what to do when there is a zoom
+			var zoom = d3.zoom()
+			    .scaleExtent([.5, 20])  // This control how much you can unzoom (x0.5) and zoom (x20)
+			    .extent([[0, 0], [width, height]])
+			    .on("zoom", updateChart);
+
+			// This add an invisible rect on top of the chart area. This rect can recover pointer events: necessary to understand when the user zoom
+			svg.append("rect")
+			    .attr("id","zoomRect")
+			    .attr("width", width)
+			    .attr("height", height)
+			    .style("fill", "none")
+			    .style("pointer-events", "none")
+			    .attr('transform', 'translate(' + 0 + ',' + -margin.top + ')')
+			    .call(zoom);
+			// now the user can zoom and it will trigger the function called updateChart
+
+			// A function that updates the chart when the user zoom and thus new boundaries are available
+			function updateChart() {
+			  // console.log("hi")
+			  // recover the new scale
+			  var newX = d3.event.transform.rescaleX(xScale);
+			  var newY = d3.event.transform.rescaleY(yScale);
+
+			  // update axes with these new boundaries
+			  // console.log(newX)
+			  xAxis_zoom.call(d3.axisBottom(newX))
+			  yAxis_zoom.call(d3.axisLeft(newY))
+
+			  var newLine=d3.line()
+			    .curve(d3.curveMonotoneX)
+			    .x(d => newX(d.x))
+			    .y(d => newY(d.y));
+
+			  // update circle position
+			  scatter.selectAll("circle")
+			    .attr('cx', function(d) {return newX(d.x)})
+			    .attr('cy', function(d) {return newY(d.y)});
+
+			  d3.selectAll(".point-text")
+			    .attr("x",d=>newX(d.x)-5)
+			    .attr("y",d=>newY(d.y)-10)
+			  // update line position
+			  scatter.selectAll("path")
+			    .attr("d",(d)=> newLine(d.values));
+			}
+
+			var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+			/* Add line into SVG */
+			var line = d3.line()
+			  .curve(d3.curveMonotoneX)
+			  .x(d => xScale(d.x))
+			  .y(d => yScale(d.y));
+
+			var test_call=function(d, type, clickForSelection){
+				console.log("came here")
+			  openResource(d, type, clickForSelection);
+			}  
+
+			scatter.selectAll('.line-group')
+			  .data(data).enter()
+			  .append('g')
+			  .attr('class', 'line-group')  
+			  // .style("display","none") 
+			  .on("mouseover", function(d, i) {
+			      svg.append("text")
+				  .attr("class", "title-text")
+				.style("fill", color(i))        
+				.text(d.name)
+				.attr("text-anchor", "middle")
+				.attr("x", (width-(margin.left+margin.right))/2)
+				.attr("y", 5);
+			    })
+			  .on("mouseout", function(d) {
+			      svg.select(".title-text").remove();
+			    })
+			  .append('path')
+			  .attr('class', 'line')  
+			  .attr('id',d=>"line"+d.lineId)
+			  .classed("lineNoHover",false)
+			  .attr('d', d => line(d.values))
+			  .style('stroke', "#808080")
+			  .style('opacity', lineOpacity)
+			  .on("mouseover", function(d,i) {
+			      d3.selectAll('.line')
+					    .style('opacity', otherLinesOpacityHover);
+			      d3.selectAll('.circle')
+					    .style('opacity', circleOpacityOnLineHover);
+			      d3.select(this)
+				.style('opacity', lineOpacityHover)
+				.style("stroke-width", lineStrokeHover)
+				.style("cursor", "pointer")
+				.style("stroke",color(i));
+			      })
+			  .on("mouseout", function(d,i) {
+			      d3.selectAll(".line")
+					    .style('opacity', lineOpacity);
+			      d3.selectAll('.circle')
+					    .style('opacity', circleOpacity);
+			      if(d.select==1)
+			      {
+			      d3.select(this)
+			      .style('opacity', lineOpacityHover)
+			      .style("stroke-width", lineStrokeHover)
+			      .style("cursor", "pointer")
+			      .style("stroke",color(i));
+			      }
+			      if(d.select==0)
+			      {
+				d3.select(this)
+				  .style("stroke-width", lineStroke)
+				  .style("cursor", "none")
+				  .style("stroke","#808080");
+			      }
+			    })
+			    .on('click',function(d,i){
+			      if(d.select==0)
+			      {
+				d.select=1;
+				d3.select(this)
+				  .style('opacity', lineOpacityHover)
+				  .style("stroke-width", lineStrokeHover)
+				  .style("cursor", "pointer")
+				  .style("stroke",color(i));
+				d3.selectAll("path")
+				  .classed("lineNoHover",true)  
+				d3.select(this)
+				  .classed("lineNoHover",false) 
+				d3.selectAll(".lineNoHover")
+				  .style("pointer-events","none")
+				d3.select(".circle_line"+d.lineId)
+				  .classed("not_selected_circle",false)
+				d3.select(".circle_line"+d.lineId).selectAll("g")
+				  .append("text")
+				  .attr("class","point-text")
+				  .attr("x", d => xScale(d.x) - 5)
+				  .attr("y", d => yScale(d.y) - 10)
+				  .text(d=>+d.sequence_id)
+				d3.selectAll(".not_selected_circle")
+				  .style("display","none");
+			      }
+			      else{
+				d.select=0;
+				d3.selectAll(".lineNoHover")
+				  .style("pointer-events","auto")
+				d3.selectAll("path")
+				  .classed("lineNoHovetest_callr",false)  
+				d3.select(this)
+				  .style("stroke-width", lineStroke)
+				  .style("cursor", "pointer")
+				  .style("stroke","#808080");
+				d3.select(".circle_line"+d.lineId)
+				  .classed("not_selected_circle",true);
+				d3.select(".circle_line"+d.lineId).selectAll("text")
+				  .remove();
+				d3.selectAll(".not_selected_circle")
+				  .style("display","initial");
+				}
+			      test_call(d, 'path', d.select)
+			    });
+
+			console.log(data[0])
+
+
+
+			  
+			var tooltip = d3.select("#learningpathwaygraph")
+			.append("div")
+			.style("opacity", 0)
+			.attr("class", "tooltip")
+			.style("background-color", "white")
+			.style("border", "solid")
+			.style("border-width", "1px")
+			.style("border-radius", "5px")
+			.style("padding", "10px")
+
+			// A function that change this tooltip when the user hover a point.
+			// Its opacity is set to 1: we can now see it.
+			var mouseoverTooltip = function() {
+			  tooltip
+			    .style("opacity", 1)
+			}
+
+			var mousemoveTooltip = function(d) {
+			  tooltip
+			    // .html("Seq Id: " + d.sequence_id)
+			    // .html("Seq Id: " + d.sequence_id+"Topic: "+d.topic)
+			    .html("Seq Id: " + d.sequence_id+"<br/> Topic: "+d.topic)
+			    .style("left", (d3.mouse(this)[0]+45) + "px")
+			    .style("top", (d3.mouse(this)[1]-20) + "px")
+			    .style("pointer-events","none")
+
+
+
+			}
+
+			// A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
+			var mouseleaveTooltip = function() {
+			  tooltip
+			    .transition()
+			    .duration(200)
+			    .style("opacity", 0)
+			}  
+
+			    
+			  /* Add circles in the line */
+			scatter.selectAll("circle-group")
+			  .data(data).enter()
+			  .append("g")
+			  .style("fill", "#808080")
+			  .attr("class",d=>"circle-normal circle_line"+d.lineId)
+			  .classed("not_selected_circle",true)
+			  .selectAll("circle")
+			  .data(d => d.values).enter()
+			  .append("g")
+			  .on("mouseover", function(d) {
+			      d3.select(this)     
+				.style("cursor", "pointer")
+				
+			    })
+			  .on("mouseout", function(d) {
+			      d3.select(this)
+				.style("cursor", "none")  
+				.transition()
+				.duration(duration)
+				// .selectAll(".text").remove();
+			    })
+			  .append("circle")
+			  .attr("cx", d => xScale(d.x))
+			  .attr("cy", d => yScale(d.y))
+			  .attr("r", circleRadius)
+			  .style('opacity', circleOpacity)
+			  .on("mouseover", function(d) {
+				d3.select(this)
+				  .style("fill",color(d.lineId));
+				mouseoverTooltip();
+				// console.log(d);
+			      })
+			  .on("mouseout", function(d) {
+			    if(d.select==0)
+			    {
+			      d3.select(this) 
+			      .style("fill","#808080")
+			      mouseleaveTooltip();
+			    }
+			    })
+			    .on("mousemove",mousemoveTooltip)
+			.on('click',function(d){
+
+			  if(d.select==0)
+			  {
+			    d3.select(this)
+			    .style("fill",color(d.lineId))
+			    d.select=1;
+			  }
+			  else{
+			    d.select=0;
+			    d3.select(this) 
+			    .style("fill","#808080")
+			  }
+			  test_call(d);
+			  // playVideo();
+			});
+
+
+			/* add points to the graph*/
+			scatter.selectAll("points")
+			  .data(valuesSelect).enter()
+			  .append("g")
+			  .style("fill", "#808080")
+			  .attr("class", "circle-normal")  
+			  .on("mouseover", function(d) {
+			      d3.select(this)     
+				.style("cursor", "pointer")
+				.attr("x", d => xScale(d.x) + 5)
+				.attr("y", d => yScale(d.y) - 10);
+			    })
+			  .on("mouseout", function(d) {
+			      d3.select(this)
+				.style("cursor", "none")  
+				.transition()
+				.duration(duration)
+				.selectAll(".text").remove();
+			    })
+			  .append("circle")
+			  .classed("not_selected_circle",true)
+			  .attr("cx", d => xScale(d.x))
+			  .attr("cy", d => yScale(d.y))
+			  .attr("r", circleRadius)
+			  .style('opacity', circleOpacity)
+			  .on("mouseover", function(d) {
+				d3.select(this)
+				  .style("fill", "#FF1493")
+				mouseoverTooltip();
+			      })
+			  .on("mouseout", function(d) {
+			    if(d.select==0)
+			    {
+			      d3.select(this) 
+				.style("fill", "#808080")
+			    }
+			    mouseleaveTooltip();
+			  })
+			.on("mousemove",mousemoveTooltip)
+			.on('click',function(d){
+
+playVideo(d);
+			if(bool==0)
+			{
+				console.log("dont hide function called");
+				bool=1;
+				document.getElementById("learn").style.display="inline-block";
+				// document.getElementsByClassName("youtube")[0].style.display="none";
+			}
+			else
+			{if(bool==1)
+			{
+				console.log("hide function called");
+				bool=0;
+				document.getElementById("learn").style.display ="none";
+				play_video();
+				// document.getElementsByClassName("youtube")[0].style.display="inline-block";
+			}}
+
+
+
+
+			  if(d.select==0)
+			  {
+			    d.select=1;
+			    d3.select(this)
+			      .classed("not_selected_circle",false);
+			  }
+			  else{
+			    d.select=0;
+			    d3.select(this)
+			      .classed("not_selected_circle",true);
+			  }
+			  test_call(d.id, 'resource', 0);
+			  
+
+
+			});
+
+
+			/* user selecting path */
+			scatter.selectAll("userPoints")
+			  .data(valuesSelect).enter()
+			  .append("g")
+			  .style("fill", "#808080")
+			  .attr("class", "circle-select")  
+			  .style("display","none")
+			  .on("mouseover", function(d) {
+			      d3.select(this)     
+				.style("cursor", "pointer")
+			    })
+			  .on("mouseout", function(d) {
+			      d3.select(this)
+				.style("cursor", "none")  
+			    })
+			  .append("circle")
+			  .attr("id",d=>"circleSelect"+d.id)
+			  .attr("cx", d => xScale(d.x))
+			  .attr("cy", d => yScale(d.y))
+			  .attr("r", circleRadius)
+			  .style('opacity', circleOpacity)
+			  .on("mouseover", function(d) {
+				d3.select(this)
+				  .style("fill", "#FF1493")
+				mouseoverTooltip();
+			      })
+			  .on("mouseout", function(d) {
+			    if(d.select==0)
+			    {
+			      d3.select(this) 
+				.style("fill", "#808080")
+			    }
+			    mouseleaveTooltip();
+			  })
+			.on("mousemove",mousemoveTooltip)
+			.on('click',function(d){
+			  d.select=1;
+			  if(selectedPoints[0]==-1)
+			  {
+			    selectedPoints[0]=d.id;
+			  }
+			  else{
+			    selectedPoints[1]=d.id;
+			    afterSelect();
+			  }
+			  //test_call(d);
+			});
+
+			function afterSelect(){
+			    if(valuesSelect[selectedPoints[0]].lineId==valuesSelect[selectedPoints[1]].lineId && valuesSelect[selectedPoints[0]].lineId!=-1)
+			    {
+			      swal("There is a path");
+			      var a=document.getElementById('line'+valuesSelect[selectedPoints[1]].lineId)
+				a.style.opacity=lineOpacityHover;
+				a.style.strokeWidth= lineStrokeHover;
+				a.style.stroke=color(valuesSelect[selectedPoints[1]].lineId);
+				a=document.getElementById('circleSelect'+selectedPoints[0]);
+				// console.log(a);
+				a.style.fill= "#808080";
+				a=document.getElementById('circleSelect'+selectedPoints[1]);
+				a.style.fill="#808080";
+				$('input[name=select-path]').prop('checked',false);
+				$('input[name=toggle-lines]').prop('checked',true);
+				d3.selectAll(".line-group")
+				.style("display","initial");
+				d3.selectAll(".circle-group")
+				  .style("display","initial");
+				d3.selectAll(".circle-normal")
+				  .style("display","initial");
+				d3.selectAll(".circle-select")
+				  .style("display","none");
+				data[valuesSelect[selectedPoints[0]].lineId]=1;
+				selectedPoints=[-1,-1];
+			    }
+			    else{
+			      swal("Sorry! There is no path");
+			      a=document.getElementById('circleSelect'+selectedPoints[0]);
+			      // console.log(a);
+			      a.style.fill= "#808080";
+			      a=document.getElementById('circleSelect'+selectedPoints[1]);
+			      a.style.fill="#808080";
+			      selectedPoints=[-1,-1];
+			    }
+			}
+
+			// /* admin selecting path */
+			// lines.selectAll("points")
+			//   .data(valuesSelect).enter()
+			//   .append("g")
+			//   .style("fill", "#808080")
+			//   .attr("class", "admin-select")  
+			//   .style("display","none")
+			//   .on("mouseover", function(d) {
+			//       d3.select(this)     
+			//         .style("cursor", "pointer")
+			//         .append("text")
+			//         .attr("class", "text")
+			//         .text(`${d.y}`)
+			//         .attr("x", d => xScale(d.x) + 5)
+			//         .attr("y", d => yScale(d.y) - 10);
+			//     })
+			//   .on("mouseout", function(d) {
+			//       d3.select(this)
+			//         .style("cursor", "none")  
+			//         .transition()
+			//         .duration(duration)
+			//         .selectAll(".text").remove();
+			//     })
+			//   .append("circle")
+			//   .attr("id",d=>"adminSelect"+d.id)
+			//   .attr("cx", d => xScale(d.x))
+			//   .attr("cy", d => yScale(d.y))
+			//   .attr("r", circleRadius)
+			//   .style('opacity', circleOpacity)
+			//   .on("mouseover", function(d) {
+			//         d3.select(this)
+			//           .style("fill", "#FF1493")
+			//         mouseoverTooltip();
+			//       })
+			//   .on("mouseout", function(d) {
+			//     if(d.select==0)
+			//     {
+			//       d3.select(this) 
+			//         .style("fill", "#808080")
+			//     }
+			//     mouseleaveTooltip();
+			// })
+			// .on("mousemove",mousemoveTooltip)
+			// .on('click',function(d){
+			//   d.select=1;
+			//   if(createPath)
+			//   {
+			//     adminSelectPath(d);
+			//   }
+			// });
+			// // {x: "2000", y: "100",select: 0,lineId:0},
+
+			// function startPath(){
+			//   createPath=true;
+			//   d3.select("#startBtn")
+			//     .style("display","none");
+			//   d3.select("#endBtn")
+			//     .style("display","initial"); 
+			// }
+
+			// function adminSelectPath(d){
+			//   pathPoints.push(d.id)
+			// }
+
+			// function endPath(){
+			//   createPath=false;
+			//   var temp=valuesSelect[pathPoints[0]].lineId;
+			//   var unique=false;
+			//   for(var i=0;i<pathPoints.length;i++)
+			//   {
+			//     if(valuesSelect[pathPoints[i]].lineId!=temp)
+			//     {
+			//       unique=true;
+			//     }
+			//     a=document.getElementById('adminSelect'+valuesSelect[pathPoints[i]].id);
+			//     a.style.fill="#808080";
+			//   }
+			//   if(unique)
+			//   {
+			//     swal({
+			//       content: {
+			//         element: "input",
+			//         attributes: {
+			//           placeholder: "Enter the name of the path.",
+			//           type: "text",
+			//         },
+			//       },    
+			//     })
+			//     .then((inputValue)=>{
+			//       if (inputValue === "") {
+			//         swal("You need to write something!");
+			//       }
+			    
+			//       createCustomPath(inputValue);
+			//     });
+			//   }
+			//   else{
+			//     swal("The path aldready exists");
+			//   }
+			// }
+
+			//   console.log(name);
+			//   var lineId=data.length;
+			//   var values=[];
+			//   var id=valuesSelect.length;
+			//   for(var i=0;i<pathPoints.length;i++)
+			//   {
+			//     var ele={};
+			//     ele.x=valuesSelect[pathPoints[i]].x;
+			//     ele.y=valuesSelect[pathPoints[i]].y;
+			//     ele.select=0;
+			//     ele.lineId=lineId;
+			//     values.push(ele);
+			//     ele.id=id;
+			//     id++;
+			//     valuesSelect.push(ele);
+			//   }
+			//   var line={name: name,lineId:lineId, select: 0,values:values};
+			//   data.push(line);
+			//   console.log(data);
+			//   d3.selectAll(".line-group")
+			//     .style("display","initial");
+			//   d3.selectAll(".circle-group")
+			//     .style("display","initial");
+			//   d3.selectAll(".circle-normal")
+			//     .style("display","initial");
+			//   d3.selectAll(".circle-select")
+			//     .style("display","none");
+			//   d3.selectAll(".admin-select")
+			//     .style("display","none");
+			//   d3.select("#startBtn")
+			//     .style("display","none");
+			//   d3.select("#endBtn")
+			//     .style("display","none");
+			    
+			  
+			//   $('input[name=admin-page]').prop('checked',false);
+
+
+			});
+
+			});
+		}
+</script>
+
+	</body>
+</html>
